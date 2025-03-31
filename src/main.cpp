@@ -23,8 +23,8 @@ struct Tile {
 };
 
 // ------------------ GLOBAL CONSTANTS ------------------
-const int MAP_WIDTH = 50;
-const int MAP_HEIGHT = 50;
+const int MAP_WIDTH = 100;
+const int MAP_HEIGHT = 100;
 const float HEX_SIZE = 30.f; // "Radius" of the pointy-topped hexagon.
 
 // Returns a color associated with each tile type.
@@ -64,20 +64,18 @@ sf::ConvexShape createPointyHex(const sf::Vector2f& center) {
    - For an odd column, shift the center down by half a hexHeight.
 */
 sf::Vector2f getHexCenter(int col, int row) {
-    float hexWidth  = std::sqrt(3.f) * HEX_SIZE;  // tip-to-tip horizontally
-    float hexHeight = HEX_SIZE;             // tip-to-tip vertically
-
-    // Horizontal spacing: 0.75 * hexWidth for each column.
-    float x = col * (0.90f * hexWidth);
-
-    // Base vertical position: row * hexHeight.
+    float hexWidth = std::sqrt(3.f) * HEX_SIZE;  // Width of a hexagon
+    float hexHeight = 2.0f * HEX_SIZE;           // Height of a hexagon
+    
+    // For pointy-topped hexagons in an offset grid:
+    float x = col * (1.0f * hexWidth);
     float y = row * hexHeight;
-
-    // For an odd column, shift down by half a hex height.
+    
+    // Offset for odd columns (creates the zig-zag effect)
     if (col % 2 == 1) {
         y += hexHeight * 0.5f;
     }
-
+    
     return sf::Vector2f(x, y);
 }
 

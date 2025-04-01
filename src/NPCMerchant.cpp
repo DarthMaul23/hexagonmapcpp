@@ -7,7 +7,7 @@ NPCMerchant::NPCMerchant(const std::string& merchantName, const sf::Vector2f& po
     
     // Circle setup
     shape.setRadius(15.0f);
-    shape.setOrigin(15.0f, 15.0f);
+    shape.setOrigin(sf::Vector2f(15.0f, 15.0f));
     shape.setPosition(position);
     shape.setFillColor(sf::Color(160, 82, 45));
     shape.setOutlineThickness(2.0f);
@@ -20,9 +20,13 @@ NPCMerchant::NPCMerchant(const std::string& merchantName, const sf::Vector2f& po
     nameText.setOutlineColor(sf::Color::Black);
     nameText.setOutlineThickness(1.0f);
 
-    sf::FloatRect bounds = nameText.getLocalBounds();
-    nameText.setOrigin(bounds.width / 2.f, bounds.height / 2.f);
-    nameText.setPosition(position.x, position.y - 35.f);
+    // Center the text without using FloatRect properties
+    // Calculate an approximate width based on the character size and string length
+    float approxWidth = nameText.getString().getSize() * nameText.getCharacterSize() * 0.6f; // Estimate width
+    float approxHeight = nameText.getCharacterSize() * 1.2f; // Estimate height
+
+    nameText.setOrigin(sf::Vector2f(approxWidth / 2.f, approxHeight / 2.f));
+    nameText.setPosition(sf::Vector2f(position.x, position.y - 35.f));
 
     // Add units and items
     addUnitForSale(ArmyUnit("Footman", ArmyUnitType::Infantry, 100, 10, 8, 50));
@@ -54,7 +58,119 @@ void NPCMerchant::draw(sf::RenderWindow& window) {
 void NPCMerchant::setFont(const sf::Font& font) {
     nameText.setFont(font);
 
-    sf::FloatRect bounds = nameText.getLocalBounds();
-    nameText.setOrigin(bounds.width / 2.f, bounds.height / 2.f);
-    nameText.setPosition(position.x, position.y - 35.f);
+    // Center the text without using FloatRect properties
+    float approxWidth = nameText.getString().getSize() * nameText.getCharacterSize() * 0.6f; // Estimate width
+    float approxHeight = nameText.getCharacterSize() * 1.2f; // Estimate height
+
+    nameText.setOrigin(sf::Vector2f(approxWidth / 2.f, approxHeight / 2.f));
+    nameText.setPosition(sf::Vector2f(position.x, position.y - 35.f));
+}
+
+bool NPCMerchant::sellItemTo(Hero* hero, int itemIndex) {
+    if (!hero || itemIndex < 0 || itemIndex >= static_cast<int>(availableItems.size())) {
+        return false;
+    }
+    
+    const game::InventoryItem& gameItem = availableItems[itemIndex];
+    
+    // Check if hero has enough gold
+    if (hero->getGold() < gameItem.value) {
+        std::cout << "Not enough gold to purchase " << gameItem.name << std::endl;
+        return false;
+    }
+    
+    // Deduct gold from hero
+    hero->spendGold(gameItem.value);
+    
+    // Add item to hero's inventory - convert from game::InventoryItem to InventoryItem
+    InventoryItem heroItem(gameItem.name, gameItem.description, gameItem.value);
+    hero->addItem(heroItem);
+    
+    std::cout << "Purchased " << gameItem.name << " for " << gameItem.value << " gold" << std::endl;
+    return true;
+}
+
+bool NPCMerchant::sellUnitTo(Hero* hero, int unitIndex) {
+    if (!hero || unitIndex < 0 || unitIndex >= static_cast<int>(availableUnits.size())) {
+        return false;
+    }
+    
+    const ArmyUnit& unit = availableUnits[unitIndex];
+    
+    // Check if hero has enough gold
+    if (hero->getGold() < unit.cost) {
+        std::cout << "Not enough gold to purchase " << unit.name << std::endl;
+        return false;
+    }
+    
+    // Check if hero has an army
+    Army* heroArmy = hero->getArmy();
+    if (!heroArmy) {
+        std::cout << "Hero has no army to add unit to" << std::endl;
+        return false;
+    }
+    
+    // Check if army has space
+    if (heroArmy->getSize() >= heroArmy->getCapacity()) {
+        std::cout << "Army is at full capacity" << std::endl;
+        return false;
+    }
+    
+    // Deduct gold from hero
+    hero->spendGold(unit.cost);
+    
+    // Add unit to hero's army
+    heroArmy->addUnit(unit);
+    
+    std::cout << "Purchased " << unit.name << " for " << unit.cost << " gold" << std::endl;
+    return true;
+}
+
+// MerchantManager implementation
+MerchantManager::MerchantManager() : selectedMerchant(nullptr) {
+    // Constructor implementation
+}
+
+void MerchantManager::addMerchant(const NPCMerchant& merchant) {
+    merchants.push_back(merchant);
+}
+
+NPCMerchant* MerchantManager::getMerchantAt(const sf::Vector2f& position) {
+    for (auto& merchant : merchants) {
+        if (merchant.contains(position)) {
+            return &merchant;
+        }
+    }
+    return nullptr;
+}
+
+bool MerchantManager::selectMerchantAt(const sf::Vector2f& position) {
+    NPCMerchant* merchant = getMerchantAt(position);
+    if (merchant) {
+        selectedMerchant = merchant;
+        return true;
+    }
+    return false;
+}
+
+void MerchantManager::deselectMerchant() {
+    selectedMerchant = nullptr;
+}
+
+void MerchantManager::update(float deltaTime) {
+    // Update logic for merchants if needed
+    // For now, merchants are static
+    (void)deltaTime; // Avoid unused parameter warning
+}
+
+void MerchantManager::draw(sf::RenderWindow& window) {
+    for (auto& merchant : merchants) {
+        merchant.draw(window);
+    }
+}
+
+void MerchantManager::setFontForAllMerchants(const sf::Font& font) {
+    for (auto& merchant : merchants) {
+        merchant.setFont(font);
+    }
 }

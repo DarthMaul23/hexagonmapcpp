@@ -4,6 +4,7 @@
 #include "City.hpp"
 #include <vector>
 #include <string>
+#include <random>
 
 namespace game {
 
@@ -16,7 +17,13 @@ private:
     std::vector<std::string> cityNames;
     int nameIndex;
     
+    // City spawn mechanics
+    int maxCities;
+    float citySpawnCooldown;
+    float citySpawnInterval;
+    
     void initializeCityNames();
+    void trySpawnRandomCity();
     
 public:
     CityManager();
@@ -35,12 +42,16 @@ public:
     GameCity* getSelectedCity() { return selectedCity; }
     
     // Update and render
-    void update();
+    void update(float deltaTime);
     void draw(sf::RenderWindow& window);
     
     // Utility
     std::string getNextCityName();
     bool isCityAt(const sf::Vector2f& position) const;
+    
+    // City list access
+    std::vector<GameCity>& getCities();
+    const std::vector<GameCity>& getCities() const;
 };
 
 } // namespace game

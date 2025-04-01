@@ -6,6 +6,7 @@
 #include <queue>
 #include <unordered_map>
 #include <functional>
+#include <limits>
 
 namespace game {
 
@@ -24,7 +25,7 @@ struct PathNode {
 
 class PathFinder {
 public:
-    // Main pathfinding function - now returns world coordinates directly
+    // Main pathfinding function
     static std::vector<sf::Vector2f> findPath(
         const std::vector<std::vector<Tile>>& tileMap,
         const sf::Vector2i& start,
@@ -32,33 +33,31 @@ public:
         int maxMovementPoints);
 
 private:
-    // Heuristic function for A* (Manhattan distance)
-    static float heuristic(const sf::Vector2i& a, const sf::Vector2i& b);
+    // Heuristic function for hex grid distance
+    static float hexDistance(const sf::Vector2i& a, const sf::Vector2i& b);
+    
+    // Check if a tile is walkable
+    static bool isWalkableTile(
+        const std::vector<std::vector<Tile>>& tileMap, 
+        const sf::Vector2i& pos);
     
     // Get valid neighboring tiles
-    static std::vector<sf::Vector2i> getNeighbors(
+    static std::vector<sf::Vector2i> getWalkableNeighbors(
         const std::vector<std::vector<Tile>>& tileMap,
         const sf::Vector2i& current);
-        
-    // Check if position is within map bounds
-    static bool isValidPosition(
-        const std::vector<std::vector<Tile>>& tileMap,
-        const sf::Vector2i& pos);
-        
-    // Reconstruct path from A* result
-    static std::vector<sf::Vector2i> reconstructPath(
-        const std::unordered_map<int, PathNode>& nodes,
-        const sf::Vector2i& goal);
     
-    // Smooth the path by adding intermediate points
-    static std::vector<sf::Vector2f> smoothPath(
-        const std::vector<sf::Vector2i>& path,
-        const std::vector<std::vector<Tile>>& tileMap);
-        
-    // Hash function for sf::Vector2i to use with unordered_map
-    static int positionToKey(const sf::Vector2i& pos) {
-        return pos.x * 10000 + pos.y;  // Assumes map size < 10000
-    }
+    // Calculate movement cost for a tile
+    static float getMovementCost(
+        const std::vector<std::vector<Tile>>& tileMap, 
+        const sf::Vector2i& pos);
+    
+    // Reconstruct path from A* algorithm results
+    static std::vector<sf::Vector2f> reconstructPath(
+        const std::vector<std::vector<Tile>>& tileMap,
+        const std::unordered_map<int, PathNode>& nodes,
+        std::function<int(const sf::Vector2i&)> coordToKey,
+        const sf::Vector2i& start,
+        const sf::Vector2i& goal);
 };
 
 } // namespace game

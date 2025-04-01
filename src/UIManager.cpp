@@ -49,7 +49,8 @@ UIManager::UIManager(unsigned int windowWidth, unsigned int windowHeight)
       modalContent(font, ""),
       closeButton(font, ""),
       titleText(font, ""),
-      startText(font, "")
+      startText(font, ""),
+      notificationText(font, "", 14)
 {
     // Initialize views
     gameView.setCenter(sf::Vector2f(0.f, 0.f));

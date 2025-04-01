@@ -21,6 +21,9 @@ protected:
     std::vector<sf::Vector2f> path;
     float moveProgress;
     float moveSpeed;
+    bool isMoving;
+    size_t currentPathIndex;
+    int movementPoints;
     
 public:
     PlayerUnit(const sf::Vector2f& pos, UnitType unitType);
@@ -38,6 +41,14 @@ public:
     bool contains(const sf::Vector2f& point) const;
     
     UnitType getType() const;
+    bool isOnPath() const;
+    
+    float getMoveSpeed() const;
+    void setMoveSpeed(float speed);
+    
+    const std::vector<sf::Vector2f>& getPath() const;
+    size_t getCurrentPathIndex() const;
+    int getRemainingMovementPoints() const;
 };
 
 #endif // PLAYER_UNIT_HPP

@@ -211,11 +211,11 @@ int main() {
         float deltaTime = clock.restart().asSeconds();
 
         // Update turn timer if in playing state
-        if (gameState == GameState::Playing) {
+       if (gameState == GameState::Playing) {
             turnTimer -= deltaTime;
             if (turnTimer <= 0.0f) {
                 // Process turn for cities
-                cityManager.update();
+                cityManager.update(deltaTime);
                 
                 // Reset timer
                 turnTimer = TURN_LENGTH;

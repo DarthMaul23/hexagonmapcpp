@@ -3,14 +3,20 @@
 #include <iostream>
 
 PlayerUnit::PlayerUnit(const sf::Vector2f& pos, UnitType unitType) 
-    : position(pos), type(unitType), isSelected(false), moveProgress(0.f), moveSpeed(2.0f),
-      isMoving(false), currentPathIndex(0) {
+    : position(pos), 
+      type(unitType), 
+      isSelected(false), 
+      moveProgress(0.f), 
+      moveSpeed(100.0f),  // Adjusted for smoother movement
+      isMoving(false), 
+      currentPathIndex(0),
+      movementPoints(100)  // Total movement points
+{
+    // Initialize visual representation with more distinctive styling
+    shape.setRadius(15.f);  
+    shape.setOrigin(sf::Vector2f(15.f, 15.f));
     
-    // Initialize visual representation
-    shape.setRadius(15.f);  // Size that fits well within hex tiles
-    shape.setOrigin(sf::Vector2f(15.f, 15.f));  // Center the shape - SFML 3.0 syntax
-    
-    // Set color based on unit type
+    // Color-coded unit types
     sf::Color unitColor;
     switch(type) {
         case UnitType::Settler:
@@ -19,11 +25,15 @@ PlayerUnit::PlayerUnit(const sf::Vector2f& pos, UnitType unitType)
         case UnitType::Warrior:
             unitColor = sf::Color(255, 100, 100);  // Light red
             break;
+        case UnitType::Builder:
+            unitColor = sf::Color(150, 255, 150);  // Light green
+            break;
         default:
             unitColor = sf::Color::White;
     }
     
-    unitColor.a = 220;  // Slightly transparent when not selected
+    // Slight transparency when not selected
+    unitColor.a = 220;
     shape.setFillColor(unitColor);
     shape.setPosition(position);
 }
@@ -60,7 +70,7 @@ bool PlayerUnit::getSelected() const {
 }
 
 void PlayerUnit::setPath(const std::vector<sf::Vector2f>& newPath) {
-    // Only process a path with at least two points (start and end)
+    // Validate path
     if (newPath.size() < 2) {
         path.clear();
         isMoving = false;
@@ -68,11 +78,11 @@ void PlayerUnit::setPath(const std::vector<sf::Vector2f>& newPath) {
         return;
     }
     
-    // Make a copy of the original path
+    // Copy path, removing initial position if very close
     path = newPath;
     
-    // Remove the first waypoint if it's the current position (to avoid stalling)
-    float minDistanceThreshold = 0.5f;
+    // Remove first waypoint if it's essentially the current position
+    float minDistanceThreshold = 5.0f;
     if (!path.empty()) {
         float dx = path[0].x - position.x;
         float dy = path[0].y - position.y;
@@ -83,24 +93,17 @@ void PlayerUnit::setPath(const std::vector<sf::Vector2f>& newPath) {
         }
     }
     
-    // If after cleaning there's only one point, clear the path
-    if (path.size() < 2) {
-        path.clear();
-        isMoving = false;
-        currentPathIndex = 0;
-        return;
-    }
-    
     // Reset movement state
-    isMoving = true;
-    currentPathIndex = 0;
-    
-    std::cout << "New path set with " << path.size() << " waypoints" << std::endl;
+    if (!path.empty()) {
+        isMoving = true;
+        currentPathIndex = 0;
+        movementPoints = 100;  // Reset movement points
+    }
 }
 
 void PlayerUnit::update(float deltaTime) {
-    // If there's no path or just one point, there's nothing to update
-    if (path.size() < 2 || !isMoving) {
+    // No path or not moving
+    if (path.empty() || !isMoving) {
         return;
     }
     
@@ -112,30 +115,33 @@ void PlayerUnit::update(float deltaTime) {
     float dy = targetPos.y - position.y;
     float distance = std::sqrt(dx*dx + dy*dy);
     
-    // Movement threshold to consider a point "reached"
-    float reachThreshold = 5.0f; // Larger threshold to prevent twerking
+    // Movement threshold
+    float reachThreshold = 10.0f;
     
     // Move towards the next position
     if (distance > reachThreshold) {
-        // Calculate direction vector
+        // Normalize direction vector
         sf::Vector2f direction = {dx / distance, dy / distance};
         
         // Move in the direction at the move speed
-        position.x += direction.x * moveSpeed * deltaTime * 100.f;
-        position.y += direction.y * moveSpeed * deltaTime * 100.f;
+        float moveAmount = moveSpeed * deltaTime;
+        position.x += direction.x * moveAmount;
+        position.y += direction.y * moveAmount;
         
-        // Update the shape position
+        // Reduce movement points
+        movementPoints -= moveAmount;
+        
+        // Update shape position
         shape.setPosition(position);
     } else {
-        // Consider the waypoint reached
+        // Waypoint reached
         currentPathIndex++;
         
-        // If we're at the last waypoint, clear the path
+        // Check if path is complete
         if (currentPathIndex >= path.size()) {
             path.clear();
             isMoving = false;
             currentPathIndex = 0;
-            return;
         }
     }
 }
@@ -143,41 +149,34 @@ void PlayerUnit::update(float deltaTime) {
 void PlayerUnit::draw(sf::RenderWindow& window) {
     // Draw path if selected and has a path
     if (isSelected && !path.empty() && currentPathIndex < path.size()) {
-        // Draw upcoming path segment
+        // Draw path segments
         for (size_t i = currentPathIndex; i < path.size() - 1; ++i) {
-            // Create a thicker line using multiple vertex arrays
-            for (int offset = -1; offset <= 1; offset++) {
-                sf::VertexArray line(sf::PrimitiveType::Lines, 2);
-                
-                // Set positions and colors
-                line[0].position = path[i];
-                line[0].color = sf::Color(255, 255, 0, 128); // Semi-transparent yellow
-                
-                line[1].position = path[i+1];
-                line[1].color = sf::Color(255, 255, 0, 128);
-                
-                window.draw(line);
-            }
+            sf::VertexArray line(sf::PrimitiveType::Lines, 2);
+            line[0].position = path[i];
+            line[0].color = sf::Color(255, 255, 0, 128); // Semi-transparent yellow
+            line[1].position = path[i+1];
+            line[1].color = sf::Color(255, 255, 0, 128);
+            window.draw(line);
             
-            // Draw waypoint dots
+            // Draw small waypoint markers
             sf::CircleShape waypoint(4.0f);
+            waypoint.setFillColor(sf::Color(255, 255, 0, 200));
             waypoint.setOrigin(sf::Vector2f(4.0f, 4.0f));
             waypoint.setPosition(path[i]);
-            waypoint.setFillColor(sf::Color(255, 255, 0, 200));
             window.draw(waypoint);
         }
         
         // Draw final waypoint
         if (!path.empty()) {
             sf::CircleShape finalWaypoint(6.0f);
+            finalWaypoint.setFillColor(sf::Color(255, 200, 0, 200));
             finalWaypoint.setOrigin(sf::Vector2f(6.0f, 6.0f));
             finalWaypoint.setPosition(path.back());
-            finalWaypoint.setFillColor(sf::Color(255, 200, 0, 200));
             window.draw(finalWaypoint);
         }
     }
     
-    // Draw unit
+    // Draw the unit itself
     window.draw(shape);
 }
 
@@ -207,4 +206,8 @@ const std::vector<sf::Vector2f>& PlayerUnit::getPath() const {
 
 size_t PlayerUnit::getCurrentPathIndex() const {
     return currentPathIndex;
+}
+
+int PlayerUnit::getRemainingMovementPoints() const {
+    return movementPoints;
 }

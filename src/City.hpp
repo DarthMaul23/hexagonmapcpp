@@ -20,6 +20,15 @@ public:
         WORKSHOP,
         WALLS
     };
+
+    // Building types
+    enum class BuildingType {
+        GRANARY,
+        WORKSHOP,
+        MARKETPLACE,
+        LIBRARY,
+        WALLS
+    };
     
 private:
     std::string name;
@@ -34,11 +43,23 @@ private:
     int storedProduction;
     int storedGold;
     
+    // Happiness and growth
+    int happiness;
+    int maxHappiness;
+    
+    // Science mechanics
+    int science;
+    int scientistsCount;
+    
     // Production queue
     std::vector<ProductionItem> productionQueue;
     ProductionItem currentProduction;
     int productionProgress;
     int productionNeeded;
+    
+    // Buildings
+    std::vector<BuildingType> buildingTypes;
+    int maxBuildings;
     
     // Visual representation
     sf::CircleShape cityShape;
@@ -58,6 +79,9 @@ public:
     void addFood(int amount);
     void addProduction(int amount);
     void addGold(int amount);
+    void addScience(int amount);
+    
+    void addBuilding(BuildingType building);
     
     void setProductionItem(ProductionItem item);
     ProductionItem getCurrentProduction() const { return currentProduction; }
@@ -70,8 +94,9 @@ public:
     void draw(sf::RenderWindow& window);
     bool contains(const sf::Vector2f& point) const;
     
-    // Utility
+    // Utility methods
     static std::string getItemName(ProductionItem item);
+    static std::string getBuildingName(BuildingType building);
 };
 
 } // namespace game

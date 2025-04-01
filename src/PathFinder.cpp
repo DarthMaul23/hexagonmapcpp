@@ -1,93 +1,77 @@
 #include "PathFinder.hpp"
 #include <cmath>
 #include <iostream>
+#include <algorithm>
+#include <unordered_set>
 
 namespace game {
 
-// Array of hex neighbor offsets for even and odd columns
+// Hex neighbor offsets for both even and odd columns
 const std::vector<std::vector<sf::Vector2i>> HEX_NEIGHBORS = {
-    // Even column offsets
+    // Even column offsets (even columns)
     {{1, 0}, {1, -1}, {0, -1}, {-1, 0}, {0, 1}, {1, 1}},
-    // Odd column offsets
+    // Odd column offsets (odd columns)
     {{1, 0}, {0, -1}, {-1, -1}, {-1, 0}, {-1, 1}, {0, 1}}
 };
 
-float PathFinder::heuristic(const sf::Vector2i& a, const sf::Vector2i& b) {
-    // Use a more accurate hex grid distance for better path estimation
+// Advanced heuristic for hex grid - uses hex distance
+float PathFinder::hexDistance(const sf::Vector2i& a, const sf::Vector2i& b) {
     int dx = std::abs(a.x - b.x);
     int dy = std::abs(a.y - b.y);
-    // For hex grids, diagonal movement allows reducing one of the coordinates
     return std::max(dx, dy) + 0.5f * std::min(dx, dy);
 }
 
-bool PathFinder::isValidPosition(const std::vector<std::vector<Tile>>& tileMap, const sf::Vector2i& pos) {
-    return pos.x >= 0 && pos.x < tileMap.size() &&
-           pos.y >= 0 && pos.y < tileMap[0].size();
+// Check if a position is walkable
+bool PathFinder::isWalkableTile(const std::vector<std::vector<Tile>>& tileMap, const sf::Vector2i& pos) {
+    if (pos.x < 0 || pos.x >= static_cast<int>(tileMap.size()) || 
+        pos.y < 0 || pos.y >= static_cast<int>(tileMap[0].size())) {
+        return false;
+    }
+    
+    TileType tileType = tileMap[pos.x][pos.y].type;
+    return tileType != TileType::Water && 
+           tileType != TileType::Mountain;
 }
 
-std::vector<sf::Vector2i> PathFinder::getNeighbors(
+// Get valid neighboring tiles
+std::vector<sf::Vector2i> PathFinder::getWalkableNeighbors(
     const std::vector<std::vector<Tile>>& tileMap,
     const sf::Vector2i& current) {
     
-    std::vector<sf::Vector2i> neighbors;
+    std::vector<sf::Vector2i> walkableNeighbors;
     bool isEvenCol = current.x % 2 == 0;
+    
+    // Select appropriate neighbor offsets based on column parity
     const auto& offsets = HEX_NEIGHBORS[isEvenCol ? 0 : 1];
     
     for (const auto& offset : offsets) {
         sf::Vector2i neighbor(current.x + offset.x, current.y + offset.y);
-        if (isValidPosition(tileMap, neighbor)) {
-            // Check if the tile type is walkable (not Water or Mountain)
-            TileType neighborType = tileMap[neighbor.x][neighbor.y].type;
-            if (neighborType != TileType::Water && neighborType != TileType::Mountain) {
-                neighbors.push_back(neighbor);
-            }
+        
+        // Check if neighbor is walkable
+        if (isWalkableTile(tileMap, neighbor)) {
+            walkableNeighbors.push_back(neighbor);
         }
     }
     
-    return neighbors;
+    return walkableNeighbors;
 }
 
-// Improved path smoothing function that only goes through tile centers
-std::vector<sf::Vector2f> PathFinder::smoothPath(
-    const std::vector<sf::Vector2i>& path,
-    const std::vector<std::vector<Tile>>& tileMap) {
-    
-    if (path.size() <= 1) {
-        return {}; // Empty or single point path, nothing to smooth
+// Calculate movement cost based on tile type
+float PathFinder::getMovementCost(const std::vector<std::vector<Tile>>& tileMap, const sf::Vector2i& pos) {
+    if (pos.x < 0 || pos.x >= static_cast<int>(tileMap.size()) || 
+        pos.y < 0 || pos.y >= static_cast<int>(tileMap[0].size())) {
+        return std::numeric_limits<float>::max();
     }
     
-    std::vector<sf::Vector2f> smoothedPath;
-    
-    // Always include the first tile's center
-    smoothedPath.push_back(tileMap[path[0].x][path[0].y].center);
-    
-    // Add each tile center for the path
-    for (size_t i = 1; i < path.size(); ++i) {
-        sf::Vector2f currentCenter = tileMap[path[i].x][path[i].y].center;
-        smoothedPath.push_back(currentCenter);
+    TileType tileType = tileMap[pos.x][pos.y].type;
+    switch (tileType) {
+        case TileType::Plains: return 1.0f;
+        case TileType::Forest: return 1.5f;
+        case TileType::Hills: return 2.0f;
+        case TileType::Water: return std::numeric_limits<float>::max();
+        case TileType::Mountain: return std::numeric_limits<float>::max();
+        default: return 1.0f;
     }
-    
-    return smoothedPath;
-}
-
-std::vector<sf::Vector2i> PathFinder::reconstructPath(
-    const std::unordered_map<int, PathNode>& nodes,
-    const sf::Vector2i& goal) {
-    
-    std::vector<sf::Vector2i> path;
-    sf::Vector2i current = goal;
-    
-    while (true) {
-        path.push_back(current);
-        auto it = nodes.find(positionToKey(current));
-        if (it == nodes.end()) break;
-        
-        if (current == it->second.parent) break;
-        current = it->second.parent;
-    }
-    
-    std::reverse(path.begin(), path.end());
-    return path;
 }
 
 std::vector<sf::Vector2f> PathFinder::findPath(
@@ -96,77 +80,112 @@ std::vector<sf::Vector2f> PathFinder::findPath(
     const sf::Vector2i& goal,
     int maxMovementPoints) {
     
-    // Check if start and goal are valid positions
-    if (!isValidPosition(tileMap, start) || !isValidPosition(tileMap, goal)) {
-        std::cout << "Invalid start or goal position." << std::endl;
-        return std::vector<sf::Vector2f>();
+    // Validate start and goal
+    if (!isWalkableTile(tileMap, start) || !isWalkableTile(tileMap, goal)) {
+        std::cout << "Invalid start or goal tile" << std::endl;
+        return {};
     }
     
-    // Check if the goal is walkable
-    if (tileMap[goal.x][goal.y].type == TileType::Water || 
-        tileMap[goal.x][goal.y].type == TileType::Mountain) {
-        std::cout << "Goal position is not walkable (water or mountain)." << std::endl;
-        return std::vector<sf::Vector2f>();
-    }
-    
-    // Priority queue for A* open set
+    // A* algorithm with hex grid specifics
     std::priority_queue<PathNode, std::vector<PathNode>, std::greater<PathNode>> openSet;
     std::unordered_map<int, PathNode> allNodes;
+    std::unordered_set<int> closedSet;
+    
+    // Hash function for tile coordinates
+    auto coordToKey = [](const sf::Vector2i& pos) {
+        return pos.x * 10000 + pos.y;
+    };
     
     // Initialize start node
-    PathNode startNode{start, 0.0f, heuristic(start, goal), start};
+    PathNode startNode{
+        start, 
+        0.0f,  // Initial cost
+        hexDistance(start, goal),  // Heuristic
+        start  // Parent (self for start)
+    };
+    
     openSet.push(startNode);
-    allNodes[positionToKey(start)] = startNode;
+    allNodes[coordToKey(start)] = startNode;
     
     while (!openSet.empty()) {
         auto current = openSet.top();
         openSet.pop();
         
-        // Goal reached
+        // Check if goal reached
         if (current.pos == goal) {
-            std::cout << "Path found!" << std::endl;
-            auto path = reconstructPath(allNodes, goal);
-            return smoothPath(path, tileMap);
+            return reconstructPath(tileMap, allNodes, coordToKey, start, goal);
         }
         
-        // Get neighbors
-        for (const auto& neighborPos : getNeighbors(tileMap, current.pos)) {
-            // Calculate movement cost based on terrain type
-            float movementCost = 1.0f; // Default cost
+        // Mark as closed
+        closedSet.insert(coordToKey(current.pos));
+        
+        // Explore neighbors
+        for (const auto& neighborPos : getWalkableNeighbors(tileMap, current.pos)) {
+            int neighborKey = coordToKey(neighborPos);
             
-            TileType tileType = tileMap[neighborPos.x][neighborPos.y].type;
-            if (tileType == TileType::Hills) {
-                movementCost = 2.0f; // Hills are harder to traverse
-            } else if (tileType == TileType::Forest) {
-                movementCost = 1.5f; // Forests are slightly harder to traverse
-            }
+            // Skip if already closed
+            if (closedSet.count(neighborKey)) continue;
             
+            // Calculate movement cost
+            float movementCost = getMovementCost(tileMap, neighborPos);
             float newCost = current.g_cost + movementCost;
             
             // Skip if exceeds movement points
             if (newCost > maxMovementPoints) continue;
             
-            int neighborKey = positionToKey(neighborPos);
-            auto existingNode = allNodes.find(neighborKey);
+            // Create neighbor node
+            PathNode neighborNode{
+                neighborPos,
+                newCost,
+                hexDistance(neighborPos, goal),
+                current.pos
+            };
             
+            // Check if node is better than existing
+            auto existingNode = allNodes.find(neighborKey);
             if (existingNode == allNodes.end() || newCost < existingNode->second.g_cost) {
-                // Create or update node
-                PathNode newNode{
-                    neighborPos,
-                    newCost,
-                    heuristic(neighborPos, goal),
-                    current.pos
-                };
-                
-                allNodes[neighborKey] = newNode;
-                openSet.push(newNode);
+                allNodes[neighborKey] = neighborNode;
+                openSet.push(neighborNode);
             }
         }
     }
     
     // No path found
-    std::cout << "No path found!" << std::endl;
-    return std::vector<sf::Vector2f>();
+    std::cout << "No path found between tiles" << std::endl;
+    return {};
+}
+
+std::vector<sf::Vector2f> PathFinder::reconstructPath(
+    const std::vector<std::vector<Tile>>& tileMap,
+    const std::unordered_map<int, PathNode>& nodes,
+    std::function<int(const sf::Vector2i&)> coordToKey,
+    const sf::Vector2i& start,
+    const sf::Vector2i& goal) {
+    
+    std::vector<sf::Vector2i> tilePath;
+    sf::Vector2i current = goal;
+    
+    // Reconstruct path by tracking parents
+    while (current != start) {
+        tilePath.push_back(current);
+        
+        auto it = nodes.find(coordToKey(current));
+        if (it == nodes.end()) break;
+        
+        current = it->second.parent;
+    }
+    tilePath.push_back(start);
+    
+    // Reverse to get from start to goal
+    std::reverse(tilePath.begin(), tilePath.end());
+    
+    // Convert to world coordinates (tile centers)
+    std::vector<sf::Vector2f> worldPath;
+    for (const auto& tilePos : tilePath) {
+        worldPath.push_back(tileMap[tilePos.x][tilePos.y].center);
+    }
+    
+    return worldPath;
 }
 
 } // namespace game

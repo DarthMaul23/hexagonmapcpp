@@ -141,6 +141,13 @@ private:
     sf::RectangleShape startButton;
     sf::Text startText;
     
+    // Notification system
+    std::string notificationMessage;
+    float notificationTimer;
+    bool showNotificationFlag;
+    sf::Text notificationText;
+    sf::RectangleShape notificationBackground;
+    
 public:
     UIManager(unsigned int windowWidth, unsigned int windowHeight);
     ~UIManager();
@@ -219,9 +226,18 @@ public:
     void drawToggleButtons(sf::RenderWindow& window);
     void drawModal(sf::RenderWindow& window);
     void drawMenu(sf::RenderWindow& window);
+    void drawNotifications(sf::RenderWindow& window);
     
     // Get font for other UI elements
     const sf::Font& getFont() const { return font; }
+    
+    // Notification system
+    void showNotification(const std::string& message, float duration = 3.0f);
+    void update(float deltaTime);
+    
+    // Proximity checks for interaction
+    bool isPlayerNearCity(const sf::Vector2f& playerPos, const game::GameCity* city, float interactionRadius = 150.0f) const;
+    bool isPlayerNearMerchant(const sf::Vector2f& playerPos, const NPCMerchant* merchant, float interactionRadius = 150.0f) const;
 };
 
 #endif // UI_MANAGER_HPP

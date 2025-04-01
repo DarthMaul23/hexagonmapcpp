@@ -86,43 +86,7 @@ void UnitManager::update(float deltaTime) {
 }
 
 void UnitManager::draw(sf::RenderWindow& window) {
-    // Draw the current path if one exists
-    if (!currentPath.empty() && selectedUnit) {
-        // Draw thicker lines connecting path points
-        for (size_t i = 0; i < currentPath.size() - 1; ++i) {
-            // Create a thicker line using multiple vertex arrays
-            for (int offset = -2; offset <= 2; offset++) {
-                sf::VertexArray line(sf::PrimitiveType::Lines, 2);
-                
-                // Calculate offset for thicker line
-                sf::Vector2f dir = currentPath[i+1] - currentPath[i];
-                float len = std::sqrt(dir.x*dir.x + dir.y*dir.y);
-                sf::Vector2f perpendicular(-dir.y/len, dir.x/len);
-                sf::Vector2f offsetVec = perpendicular * static_cast<float>(offset);
-                
-                // Set positions and colors
-                line[0].position = currentPath[i] + offsetVec;
-                line[0].color = sf::Color(255, 255, 0, 128); // Semi-transparent yellow
-                
-                line[1].position = currentPath[i+1] + offsetVec;
-                line[1].color = sf::Color(255, 255, 0, 128);
-                
-                window.draw(line);
-            }
-        }
-        
-        // Draw larger dots at each waypoint
-        for (const auto& point : currentPath) {
-            sf::CircleShape waypoint(6.0f); // Larger radius
-            waypoint.setOrigin(sf::Vector2f(6.0f, 6.0f));
-            waypoint.setPosition(point);
-            waypoint.setFillColor(sf::Color(255, 255, 0, 200)); // More opaque yellow
-            waypoint.setOutlineColor(sf::Color::Black);
-            waypoint.setOutlineThickness(1.0f);
-            window.draw(waypoint);
-        }
-    }
-    
+    // Each unit now draws its own path in its draw method
     // Draw all units
     for (auto& unit : units) {
         unit.draw(window);

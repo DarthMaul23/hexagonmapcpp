@@ -1,8 +1,10 @@
 #include "PlayerUnit.hpp"
 #include <cmath>
+#include <iostream>
 
 PlayerUnit::PlayerUnit(const sf::Vector2f& pos, UnitType unitType) 
-    : position(pos), type(unitType), isSelected(false), moveProgress(0.f), moveSpeed(2.0f) {
+    : position(pos), type(unitType), isSelected(false), moveProgress(0.f), moveSpeed(2.0f),
+      isMoving(false), currentPathIndex(0) {
     
     // Initialize visual representation
     shape.setRadius(15.f);  // Size that fits well within hex tiles
@@ -61,6 +63,8 @@ void PlayerUnit::setPath(const std::vector<sf::Vector2f>& newPath) {
     // Only process a path with at least two points (start and end)
     if (newPath.size() < 2) {
         path.clear();
+        isMoving = false;
+        currentPathIndex = 0;
         return;
     }
     
@@ -82,24 +86,28 @@ void PlayerUnit::setPath(const std::vector<sf::Vector2f>& newPath) {
     // If after cleaning there's only one point, clear the path
     if (path.size() < 2) {
         path.clear();
+        isMoving = false;
+        currentPathIndex = 0;
         return;
     }
     
-    // Reset movement progress
-    moveProgress = 0.0f;
+    // Reset movement state
+    isMoving = true;
+    currentPathIndex = 0;
+    
+    std::cout << "New path set with " << path.size() << " waypoints" << std::endl;
 }
 
 void PlayerUnit::update(float deltaTime) {
     // If there's no path or just one point, there's nothing to update
-    if (path.size() < 2) {
+    if (path.size() < 2 || !isMoving) {
         return;
     }
     
-    // Get current segment start and end points
-    sf::Vector2f startPos = path[0];
-    sf::Vector2f targetPos = path[1];
+    // Get current waypoint
+    sf::Vector2f targetPos = path[currentPathIndex];
     
-    // Calculate distance to the next position
+    // Calculate distance to the current waypoint
     float dx = targetPos.x - position.x;
     float dy = targetPos.y - position.y;
     float distance = std::sqrt(dx*dx + dy*dy);
@@ -119,21 +127,57 @@ void PlayerUnit::update(float deltaTime) {
         // Update the shape position
         shape.setPosition(position);
     } else {
-        // Consider the waypoint reached, remove it
-        path.erase(path.begin());
+        // Consider the waypoint reached
+        currentPathIndex++;
         
-        // If we've reached the last waypoint, clear the path
-        if (path.size() < 2) {
+        // If we're at the last waypoint, clear the path
+        if (currentPathIndex >= path.size()) {
             path.clear();
+            isMoving = false;
+            currentPathIndex = 0;
             return;
         }
-        
-        // If there's still a path, we want to smoothly transition to the next segment
-        // Don't snap directly to the waypoint, but continue from current position
     }
 }
 
 void PlayerUnit::draw(sf::RenderWindow& window) {
+    // Draw path if selected and has a path
+    if (isSelected && !path.empty() && currentPathIndex < path.size()) {
+        // Draw upcoming path segment
+        for (size_t i = currentPathIndex; i < path.size() - 1; ++i) {
+            // Create a thicker line using multiple vertex arrays
+            for (int offset = -1; offset <= 1; offset++) {
+                sf::VertexArray line(sf::PrimitiveType::Lines, 2);
+                
+                // Set positions and colors
+                line[0].position = path[i];
+                line[0].color = sf::Color(255, 255, 0, 128); // Semi-transparent yellow
+                
+                line[1].position = path[i+1];
+                line[1].color = sf::Color(255, 255, 0, 128);
+                
+                window.draw(line);
+            }
+            
+            // Draw waypoint dots
+            sf::CircleShape waypoint(4.0f);
+            waypoint.setOrigin(sf::Vector2f(4.0f, 4.0f));
+            waypoint.setPosition(path[i]);
+            waypoint.setFillColor(sf::Color(255, 255, 0, 200));
+            window.draw(waypoint);
+        }
+        
+        // Draw final waypoint
+        if (!path.empty()) {
+            sf::CircleShape finalWaypoint(6.0f);
+            finalWaypoint.setOrigin(sf::Vector2f(6.0f, 6.0f));
+            finalWaypoint.setPosition(path.back());
+            finalWaypoint.setFillColor(sf::Color(255, 200, 0, 200));
+            window.draw(finalWaypoint);
+        }
+    }
+    
+    // Draw unit
     window.draw(shape);
 }
 
@@ -143,4 +187,24 @@ bool PlayerUnit::contains(const sf::Vector2f& point) const {
 
 UnitType PlayerUnit::getType() const {
     return type;
+}
+
+bool PlayerUnit::isOnPath() const {
+    return isMoving && !path.empty();
+}
+
+float PlayerUnit::getMoveSpeed() const {
+    return moveSpeed;
+}
+
+void PlayerUnit::setMoveSpeed(float speed) {
+    moveSpeed = speed;
+}
+
+const std::vector<sf::Vector2f>& PlayerUnit::getPath() const {
+    return path;
+}
+
+size_t PlayerUnit::getCurrentPathIndex() const {
+    return currentPathIndex;
 }

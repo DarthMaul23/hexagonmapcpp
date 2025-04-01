@@ -47,7 +47,7 @@ std::vector<sf::Vector2i> PathFinder::getNeighbors(
     return neighbors;
 }
 
-// Function to smooth the path by adding intermediate points between sharp turns
+// Improved path smoothing function that only goes through tile centers
 std::vector<sf::Vector2f> PathFinder::smoothPath(
     const std::vector<sf::Vector2i>& path,
     const std::vector<std::vector<Tile>>& tileMap) {
@@ -61,16 +61,11 @@ std::vector<sf::Vector2f> PathFinder::smoothPath(
     // Always include the first tile's center
     smoothedPath.push_back(tileMap[path[0].x][path[0].y].center);
     
-    // For middle points in path (all except first and last)
-    for (size_t i = 1; i < path.size() - 1; ++i) {
+    // Add each tile center for the path
+    for (size_t i = 1; i < path.size(); ++i) {
         sf::Vector2f currentCenter = tileMap[path[i].x][path[i].y].center;
-        
-        // Add the current tile center
         smoothedPath.push_back(currentCenter);
     }
-    
-    // Always include the last tile's center
-    smoothedPath.push_back(tileMap[path.back().x][path.back().y].center);
     
     return smoothedPath;
 }

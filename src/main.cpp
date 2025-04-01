@@ -20,8 +20,8 @@ using namespace game;
 // Constants
 const unsigned int WINDOW_WIDTH = 1024;
 const unsigned int WINDOW_HEIGHT = 768;
-const int MAP_WIDTH = 40;
-const int MAP_HEIGHT = 30;
+const int MAP_WIDTH = 120;
+const int MAP_HEIGHT = 80;
 const float HEX_SIZE = 30.f;
 const float HEX_WIDTH = std::sqrt(3.f) * HEX_SIZE;
 const float HEX_HEIGHT = 2.0f * HEX_SIZE;

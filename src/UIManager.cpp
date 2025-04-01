@@ -356,7 +356,7 @@ bool UIManager::initialize() {
     
     // Hero/Army toggle buttons
     heroButtonText.setFont(font);
-    heroButtonText.setString("Hero Info");
+    heroButtonText.setString("Unit Info");
     heroButtonText.setCharacterSize(16);
     heroButtonText.setFillColor(sf::Color::White);
     

@@ -3,6 +3,7 @@
 #include <iostream>
 #include <algorithm>
 #include <unordered_set>
+#include <queue>
 
 namespace game {
 
@@ -179,10 +180,31 @@ std::vector<sf::Vector2f> PathFinder::reconstructPath(
     // Reverse to get from start to goal
     std::reverse(tilePath.begin(), tilePath.end());
     
-    // Convert to world coordinates (tile centers)
+    // Expand path to include intermediate tile centers
     std::vector<sf::Vector2f> worldPath;
-    for (const auto& tilePos : tilePath) {
-        worldPath.push_back(tileMap[tilePos.x][tilePos.y].center);
+    
+    // Add start point
+    worldPath.push_back(tileMap[tilePath[0].x][tilePath[0].y].center);
+    
+    // Interpolate between tile centers
+    for (size_t i = 1; i < tilePath.size(); ++i) {
+        sf::Vector2i prevTile = tilePath[i-1];
+        sf::Vector2i currentTile = tilePath[i];
+        
+        // Get center points
+        sf::Vector2f prevCenter = tileMap[prevTile.x][prevTile.y].center;
+        sf::Vector2f currentCenter = tileMap[currentTile.x][currentTile.y].center;
+        
+        // Calculate intermediate points to go through tile centers
+        // First, find the midpoint between previous and current tile centers
+        sf::Vector2f midPoint(
+            (prevCenter.x + currentCenter.x) / 2.0f,
+            (prevCenter.y + currentCenter.y) / 2.0f
+        );
+        
+        // Add the midpoint to ensure we pass through neighboring tile centers
+        worldPath.push_back(midPoint);
+        worldPath.push_back(currentCenter);
     }
     
     return worldPath;

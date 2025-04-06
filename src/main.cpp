@@ -1,6 +1,6 @@
 #include "GameEntities.hpp"
 #include "PlayerUnit.hpp"
-#include "UIManager.hpp"
+#include "UI/Manager/UIManager.hpp"
 #include "CityManager.hpp"
 #include "UnitManager.hpp"
 #include "PathFinder.hpp"

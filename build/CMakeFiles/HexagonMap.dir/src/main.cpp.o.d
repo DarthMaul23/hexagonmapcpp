@@ -1075,12 +1075,7 @@ CMakeFiles/HexagonMap.dir/src/main.cpp.o: \
   /opt/homebrew/include/SFML/System/MemoryInputStream.hpp \
   /opt/homebrew/include/SFML/System/Sleep.hpp \
   /Users/mp/Documents/CPP/hexagonmapcpp/src/PlayerUnit.hpp \
-  /Users/mp/Documents/CPP/hexagonmapcpp/src/UIManager.hpp \
-  /Users/mp/Documents/CPP/hexagonmapcpp/src/Hero.hpp \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/map \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__tree \
-  /Users/mp/Documents/CPP/hexagonmapcpp/src/Army.hpp \
-  /Users/mp/Documents/CPP/hexagonmapcpp/src/NPCMerchant.hpp \
+  /Users/mp/Documents/CPP/hexagonmapcpp/src/UI/Manager/UIManager.hpp \
   /Users/mp/Documents/CPP/hexagonmapcpp/src/CityManager.hpp \
   /Users/mp/Documents/CPP/hexagonmapcpp/src/City.hpp \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/random \
@@ -1135,4 +1130,9 @@ CMakeFiles/HexagonMap.dir/src/main.cpp.o: \
   /Users/mp/Documents/CPP/hexagonmapcpp/src/PathFinder.hpp \
   /Users/mp/Documents/CPP/hexagonmapcpp/src/Tile.hpp \
   /Users/mp/Documents/CPP/hexagonmapcpp/src/GameManager.hpp \
+  /Users/mp/Documents/CPP/hexagonmapcpp/src/Hero.hpp \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/map \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__tree \
+  /Users/mp/Documents/CPP/hexagonmapcpp/src/Army.hpp \
+  /Users/mp/Documents/CPP/hexagonmapcpp/src/NPCMerchant.hpp \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/iostream

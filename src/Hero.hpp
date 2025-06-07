@@ -108,6 +108,9 @@ public:
     
     // Draw hero with UI elements - virtual from PlayerUnit
     void draw(sf::RenderWindow& window);
+    
+    // Draw hero with sprite texture for 2.5D rendering
+    void drawSprite(sf::RenderWindow& window, const sf::Texture& spriteTexture);
 
     // Set font for UI elements
     void setFont(const sf::Font& font);

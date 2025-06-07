@@ -1,5 +1,6 @@
 #include "UIManager.hpp"
 #include "City.hpp"  // Include full definition of GameCity
+#include "HeroesGraphics.hpp"  // Add Heroes of Might and Magic 3 style graphics
 #include <iostream>
 
 UIManager::UIManager(unsigned int windowWidth, unsigned int windowHeight) 
@@ -59,52 +60,52 @@ UIManager::UIManager(unsigned int windowWidth, unsigned int windowHeight)
     uiView.setCenter(sf::Vector2f(static_cast<float>(windowWidth/2), static_cast<float>(windowHeight/2)));
     uiView.setSize(sf::Vector2f(static_cast<float>(windowWidth), static_cast<float>(windowHeight)));
     
-    // Set up resource panel
+    // Set up resource panel with Heroes style
     resourcePanel.setSize(sf::Vector2f(200.f, 120.f));
-    resourcePanel.setFillColor(sf::Color(40, 40, 60, 200));
-    resourcePanel.setOutlineColor(sf::Color(80, 80, 100));
+    resourcePanel.setFillColor(HeroesGraphics::PANEL_BACKGROUND);
+    resourcePanel.setOutlineColor(HeroesGraphics::PANEL_BORDER);
     resourcePanel.setOutlineThickness(2.f);
     
-    // Set up unit info panel
+    // Set up unit info panel with Heroes style
     unitInfoPanel.setSize(sf::Vector2f(200.f, 150.f));
-    unitInfoPanel.setFillColor(sf::Color(40, 40, 60, 200));
-    unitInfoPanel.setOutlineColor(sf::Color(80, 80, 100));
+    unitInfoPanel.setFillColor(HeroesGraphics::PANEL_BACKGROUND);
+    unitInfoPanel.setOutlineColor(HeroesGraphics::PANEL_BORDER);
     unitInfoPanel.setOutlineThickness(2.f);
     
-    // Set up city panel
+    // Set up city panel with Heroes style
     cityPanel.setSize(sf::Vector2f(400.f, 300.f));
-    cityPanel.setFillColor(sf::Color(40, 40, 60, 230));
-    cityPanel.setOutlineColor(sf::Color(100, 100, 150));
+    cityPanel.setFillColor(HeroesGraphics::PANEL_BACKGROUND);
+    cityPanel.setOutlineColor(HeroesGraphics::PANEL_BORDER);
     cityPanel.setOutlineThickness(2.f);
     
-    // Hero panel
+    // Hero panel with Heroes style
     heroPanel.setSize(sf::Vector2f(500.f, 400.f));
-    heroPanel.setFillColor(sf::Color(40, 40, 60, 230));
-    heroPanel.setOutlineColor(sf::Color(100, 100, 150));
+    heroPanel.setFillColor(HeroesGraphics::PANEL_BACKGROUND);
+    heroPanel.setOutlineColor(HeroesGraphics::PANEL_BORDER);
     heroPanel.setOutlineThickness(2.f);
     
-    // Hero inventory panel (sub-panel)
+    // Hero inventory panel (sub-panel) with Heroes style
     inventoryPanel.setSize(sf::Vector2f(240.f, 280.f));
-    inventoryPanel.setFillColor(sf::Color(50, 50, 70, 200));
-    inventoryPanel.setOutlineColor(sf::Color(100, 100, 150));
+    inventoryPanel.setFillColor(HeroesGraphics::SUBPANEL_BACKGROUND);
+    inventoryPanel.setOutlineColor(HeroesGraphics::PANEL_BORDER);
     inventoryPanel.setOutlineThickness(1.f);
     
-    // Hero skills panel (sub-panel)
+    // Hero skills panel (sub-panel) with Heroes style
     skillPanel.setSize(sf::Vector2f(240.f, 280.f));
-    skillPanel.setFillColor(sf::Color(50, 50, 70, 200));
-    skillPanel.setOutlineColor(sf::Color(100, 100, 150));
+    skillPanel.setFillColor(HeroesGraphics::SUBPANEL_BACKGROUND);
+    skillPanel.setOutlineColor(HeroesGraphics::PANEL_BORDER);
     skillPanel.setOutlineThickness(1.f);
     
-    // Army panel
+    // Army panel with Heroes style
     armyPanel.setSize(sf::Vector2f(500.f, 400.f));
-    armyPanel.setFillColor(sf::Color(40, 40, 60, 230));
-    armyPanel.setOutlineColor(sf::Color(100, 100, 150));
+    armyPanel.setFillColor(HeroesGraphics::PANEL_BACKGROUND);
+    armyPanel.setOutlineColor(HeroesGraphics::PANEL_BORDER);
     armyPanel.setOutlineThickness(2.f);
     
-    // Merchant panel
+    // Merchant panel with Heroes style
     merchantPanel.setSize(sf::Vector2f(550.f, 450.f));
-    merchantPanel.setFillColor(sf::Color(40, 40, 60, 230));
-    merchantPanel.setOutlineColor(sf::Color(100, 100, 150));
+    merchantPanel.setFillColor(HeroesGraphics::PANEL_BACKGROUND);
+    merchantPanel.setOutlineColor(HeroesGraphics::PANEL_BORDER);
     merchantPanel.setOutlineThickness(2.f);
     
     // Shop items panel (sub-panel)

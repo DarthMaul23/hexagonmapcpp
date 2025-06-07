@@ -18,6 +18,9 @@ private:
     // Merchant manager to handle all merchants
     MerchantManager merchantManager;
     
+    // Sprite textures for 2.5D rendering
+    sf::Texture soldierTexture;
+    
     // Selected game element
     enum class SelectedEntityType {
         None,
@@ -34,6 +37,10 @@ public:
     
     // Initialization
     void initialize(const sf::Vector2f& startPosition, const sf::Font& font);
+    
+    // Texture management
+    const sf::Texture& getSoldierTexture() const { return soldierTexture; }
+    bool loadTextures();
     
     // Hero management
     Hero* getPlayerHero() const { return playerHero; }

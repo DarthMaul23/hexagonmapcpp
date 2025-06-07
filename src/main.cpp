@@ -1,10 +1,11 @@
 #include "GameEntities.hpp"
 #include "PlayerUnit.hpp"
-#include "UI/Manager/UIManager.hpp"
+#include "UIManager.hpp"
 #include "CityManager.hpp"
 #include "UnitManager.hpp"
 #include "PathFinder.hpp"
 #include "GameManager.hpp"
+#include "RomanUI.hpp"    // Roman Empire themed UI system
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <cmath>
@@ -25,6 +26,11 @@ const int MAP_HEIGHT = 180;
 const float HEX_SIZE = 30.f;
 const float HEX_WIDTH = std::sqrt(3.f) * HEX_SIZE;
 const float HEX_HEIGHT = 2.0f * HEX_SIZE;
+
+// Global modal system variables
+RomanUI::ModalType currentModal = RomanUI::ModalType::None;
+bool isModalOpen = false;
+sf::Vector2f nearestCityPos;
 
 // Global function to convert screen coordinates to tile coordinates.
 // This uses axial coordinates and rounds to the nearest hex.
@@ -55,6 +61,20 @@ sf::Vector2i screenToTile(const sf::Vector2f& screenPos) {
     return sf::Vector2i(rx, rz);
 }
 
+// Enhanced click detection for sprite-based characters in 2.5D
+bool isClickOnSprite(const sf::Vector2f& clickPos, const sf::Vector2f& spritePos, float spriteScale = 0.5f) {
+    // Calculate sprite bounds considering the 2.5D scaling
+    float spriteSize = 32.0f * spriteScale; // Base sprite size * scale
+    sf::FloatRect spriteBounds(
+        spritePos.x - spriteSize / 2.0f,
+        spritePos.y - spriteSize / 2.0f,
+        spriteSize,
+        spriteSize
+    );
+    
+    return spriteBounds.contains(clickPos);
+}
+
 // Creates a pointy-topped hexagon shape given a center.
 sf::ConvexShape createPointyHex(const sf::Vector2f& center) {
     sf::ConvexShape hexagon;
@@ -70,31 +90,8 @@ sf::ConvexShape createPointyHex(const sf::Vector2f& center) {
 
 // Forward declaration for a function to draw a tile
 void drawHexagon(sf::RenderWindow& window, const Tile& tile) {
-    sf::ConvexShape hex = createPointyHex(tile.center);
-    
-    // Set color based on tile type
-    switch (tile.type) {
-        case TileType::Plains:
-            hex.setFillColor(sf::Color(180, 230, 130)); // Light green
-            break;
-        case TileType::Hills:
-            hex.setFillColor(sf::Color(200, 180, 120)); // Tan
-            break;
-        case TileType::Mountain:
-            hex.setFillColor(sf::Color(160, 160, 160)); // Gray
-            break;
-        case TileType::Forest:
-            hex.setFillColor(sf::Color(34, 139, 34)); // Forest green
-            break;
-        case TileType::Water:
-            hex.setFillColor(sf::Color(65, 105, 225)); // Blue
-            break;
-    }
-    
-    hex.setOutlineThickness(1.0f);
-    hex.setOutlineColor(sf::Color(100, 100, 100));
-    
-    window.draw(hex);
+    // Use the Roman Empire 2.5D style hexagon rendering
+    RomanUI::drawRomanHexagon2D5(window, tile, HEX_SIZE);
 }
 
 int main() {
@@ -111,9 +108,15 @@ int main() {
         return -1;
     }
 
-    // Create game and UI views
+    // Create game and UI views with Roman UI layout
     sf::View& gameView = uiManager.getGameView();
     sf::View& uiView = uiManager.getUIView();
+    
+    // Adjust game view to account for Roman sidebar
+    float gameAreaWidth = WINDOW_WIDTH - RomanUI::Layout::SIDEBAR_WIDTH;
+    gameView.setSize(sf::Vector2f(gameAreaWidth, WINDOW_HEIGHT));
+    gameView.setViewport(sf::FloatRect(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(gameAreaWidth / WINDOW_WIDTH, 1.0f)));
+    
     window.setView(gameView);
 
     // Create the tile map
@@ -246,10 +249,68 @@ int main() {
                         }
                     }
                     else if (gameState == GameState::Playing) {
+                        // Handle modal interactions first
+                        if (isModalOpen) {
+                            sf::Vector2f uiPos = window.mapPixelToCoords(pixelPos, uiView);
+                            
+                            // Check if click is on modal close button
+                            float modalX = (uiView.getSize().x - RomanUI::Layout::MODAL_WIDTH) / 2;
+                            float modalY = (uiView.getSize().y - RomanUI::Layout::MODAL_HEIGHT) / 2;
+                            
+                            // Close button area (bottom-right of modal)
+                            float closeButtonX = modalX + RomanUI::Layout::MODAL_WIDTH - 120;
+                            float closeButtonY = modalY + RomanUI::Layout::MODAL_HEIGHT - 50;
+                            float closeButtonWidth = 100;
+                            float closeButtonHeight = 30;
+                            
+                            // Debug output for modal click detection
+                            std::cout << "Modal click at UI position: " << uiPos.x << ", " << uiPos.y << std::endl;
+                            std::cout << "Close button area: " << closeButtonX << ", " << closeButtonY 
+                                     << " to " << (closeButtonX + closeButtonWidth) << ", " << (closeButtonY + closeButtonHeight) << std::endl;
+                            
+                            if (uiPos.x >= closeButtonX && uiPos.x <= closeButtonX + closeButtonWidth &&
+                                uiPos.y >= closeButtonY && uiPos.y <= closeButtonY + closeButtonHeight) {
+                                // Close button clicked
+                                std::cout << "Close button clicked!" << std::endl;
+                                currentModal = RomanUI::ModalType::None;
+                                isModalOpen = false;
+                                continue;
+                            }
+                            
+                            // Check if click is outside modal area to close it
+                            if (uiPos.x < modalX || uiPos.x > modalX + RomanUI::Layout::MODAL_WIDTH ||
+                                uiPos.y < modalY || uiPos.y > modalY + RomanUI::Layout::MODAL_HEIGHT) {
+                                std::cout << "Clicked outside modal, closing." << std::endl;
+                                currentModal = RomanUI::ModalType::None;
+                                isModalOpen = false;
+                            }
+                            continue; // Skip to next iteration when modal is open
+                        }
+                        
                         // Handle UI interactions
                         sf::Vector2f uiPos = window.mapPixelToCoords(pixelPos, uiView);
                         
-                        // Check for UI button clicks
+                        // Check for Roman UI sidebar button clicks
+                        float sidebarX = uiView.getSize().x - RomanUI::Layout::SIDEBAR_WIDTH;
+                        if (uiPos.x >= sidebarX) {
+                            // Click is in sidebar area
+                            float buttonY = 160; // Start after minimap
+                            float buttonSpacing = RomanUI::Layout::BUTTON_HEIGHT + 10;
+                            
+                            if (uiPos.y >= buttonY && uiPos.y < buttonY + RomanUI::Layout::BUTTON_HEIGHT) {
+                                currentModal = RomanUI::ModalType::CharacterManagement;
+                                isModalOpen = true;
+                            } else if (uiPos.y >= buttonY + buttonSpacing && uiPos.y < buttonY + buttonSpacing + RomanUI::Layout::BUTTON_HEIGHT) {
+                                currentModal = RomanUI::ModalType::ArmyManagement;
+                                isModalOpen = true;
+                            } else if (uiPos.y >= buttonY + 2*buttonSpacing && uiPos.y < buttonY + 2*buttonSpacing + RomanUI::Layout::BUTTON_HEIGHT) {
+                                currentModal = RomanUI::ModalType::SkillsManagement;
+                                isModalOpen = true;
+                            }
+                            continue; // Skip world clicks when clicking sidebar
+                        }
+                        
+                        // Legacy UI button handling (for compatibility)
                         if (uiManager.isHeroButtonClicked(uiPos)) {
                             if (gameManager.getPlayerHero()) {
                                 uiManager.showHeroInfo(gameManager.getPlayerHero());
@@ -270,10 +331,13 @@ int main() {
                         }
                         else {
                             // Check for world object interactions
+                            // IMPORTANT: Map pixel coordinates to the current game view to handle camera movement
                             sf::Vector2f worldPos = window.mapPixelToCoords(pixelPos, gameView);
                             
-                            // Debug output for clicking
-                            std::cout << "Click at world position: " << worldPos.x << ", " << worldPos.y << std::endl;
+                            // Debug output for clicking with view center for debugging
+                            sf::Vector2f viewCenter = gameView.getCenter();
+                            std::cout << "Click at world position: " << worldPos.x << ", " << worldPos.y 
+                                     << " (view center: " << viewCenter.x << ", " << viewCenter.y << ")" << std::endl;
                             
                             // Try to select the hero or a merchant
                             if (gameManager.trySelectEntityAt(worldPos)) {
@@ -286,7 +350,7 @@ int main() {
                             else if (!unitManager.trySelectUnitAt(worldPos)) {
                                 // Try to select a city
                                 if (cityManager.selectCityAt(worldPos)) {
-                                    GameCity* selectedCity = cityManager.getSelectedCity();
+                                    game::GameCity* selectedCity = cityManager.getSelectedCity();
                                     std::cout << "Selected city: " << selectedCity->getName() << std::endl;
                                     uiManager.showCityInfo(selectedCity);
                                     gameState = GameState::CityView;
@@ -392,6 +456,7 @@ int main() {
                     }
                 }
                 else if (mouseEvent->button == sf::Mouse::Button::Right && gameState == GameState::Playing) {
+                    // IMPORTANT: Map pixel coordinates to the current game view to handle camera movement
                     sf::Vector2f worldPos = window.mapPixelToCoords(pixelPos, gameView);
                     
                     // If hero is selected, move the hero (which moves the army with it)
@@ -511,6 +576,55 @@ int main() {
                     if (keyEvent->code == sf::Keyboard::Key::C) {
                         std::cout << "City count: " << cityManager.getCityCount() << std::endl;
                     }
+                    
+                    // Roman UI Modal shortcuts
+                    if (keyEvent->code == sf::Keyboard::Key::Q) {
+                        currentModal = RomanUI::ModalType::CharacterManagement;
+                        isModalOpen = true;
+                    }
+                    
+                    if (keyEvent->code == sf::Keyboard::Key::R) {
+                        currentModal = RomanUI::ModalType::ArmyManagement;
+                        isModalOpen = true;
+                    }
+                    
+                    if (keyEvent->code == sf::Keyboard::Key::T) {
+                        currentModal = RomanUI::ModalType::SkillsManagement;
+                        isModalOpen = true;
+                    }
+                    
+                    // City interaction - press E when near a city
+                    if (keyEvent->code == sf::Keyboard::Key::E) {
+                        // Check if player is near any city
+                        if (gameManager.getPlayerHero()) {
+                            sf::Vector2f heroPos = gameManager.getPlayerHero()->getPosition();
+                            auto& cities = cityManager.getCities();
+                            bool foundNearbyCity = false;
+                            for (const auto& city : cities) {
+                                sf::Vector2f cityPos = city.getPosition();
+                                float distance = std::sqrt(std::pow(heroPos.x - cityPos.x, 2) + 
+                                                          std::pow(heroPos.y - cityPos.y, 2));
+                                // Increased detection radius for easier interaction
+                                if (distance < HEX_SIZE * 3.5f) { // Within 3.5 hex radius instead of 2
+                                    currentModal = RomanUI::ModalType::CityManagement;
+                                    isModalOpen = true;
+                                    nearestCityPos = cityPos;
+                                    foundNearbyCity = true;
+                                    std::cout << "Entering city: " << city.getName() << " (distance: " << distance << ")" << std::endl;
+                                    break;
+                                }
+                            }
+                            if (!foundNearbyCity) {
+                                std::cout << "No city nearby. Move closer to a city and press E to enter." << std::endl;
+                            }
+                        }
+                    }
+                    
+                    // Close modal with Escape
+                    if (keyEvent->code == sf::Keyboard::Key::Escape && isModalOpen) {
+                        currentModal = RomanUI::ModalType::None;
+                        isModalOpen = false;
+                    }
                 }
             }
             else if (auto keyEvent = event.getIf<sf::Event::KeyReleased>()) {
@@ -554,7 +668,7 @@ int main() {
                     // Only draw if in visible area
                     if (center.x >= left && center.x <= right && 
                         center.y >= top && center.y <= bottom) {
-                        drawHexagon(window, tileMap[x][y]);
+                        RomanUI::drawRomanHexagon2D5(window, tileMap[x][y], HEX_SIZE);
                     }
                 }
             }
@@ -562,40 +676,112 @@ int main() {
             // Draw game entities
             gameManager.draw(window);
             
-            // Draw cities - debug output
-            std::cout << "Drawing " << cityManager.getCityCount() << " cities." << std::endl;
-            cityManager.draw(window);
+            // Draw cities with Roman styling and proximity detection
+            auto& cities = cityManager.getCities();
+            sf::Vector2f heroPos = gameManager.getPlayerHero() ? gameManager.getPlayerHero()->getPosition() : sf::Vector2f(0, 0);
+            
+            for (const auto& city : cities) {
+                sf::Vector2f cityPos = city.getPosition();
+                float distance = gameManager.getPlayerHero() ? 
+                    std::sqrt(std::pow(heroPos.x - cityPos.x, 2) + std::pow(heroPos.y - cityPos.y, 2)) : 
+                    std::numeric_limits<float>::max();
+                // Use same improved detection radius as keyboard interaction
+                bool isPlayerNear = distance < HEX_SIZE * 3.5f;
+                
+                RomanUI::drawRomanCity2D5(window, cityPos, city.getName(), uiManager.getFont(), isPlayerNear);
+            }
             
             // Draw units
             unitManager.draw(window);
 
             // Draw UI elements
             window.setView(uiView);
-            uiManager.drawResourcePanel(window);
-            uiManager.drawUnitInfo(window, unitManager.getSelectedUnit());
             
-            // Draw toggle buttons for hero and army
-            uiManager.drawToggleButtons(window);
+            // Draw Roman-style sidebar with minimap and management buttons
+            sf::Vector2f uiViewSize = uiView.getSize();
+            sf::Vector2f playerPos = gameManager.getPlayerHero() ? gameManager.getPlayerHero()->getPosition() : sf::Vector2f(0, 0);
             
-            // Draw panel based on current state
-            switch (gameState) {
-                case GameState::CityView:
-                    uiManager.drawCityInfo(window, cityManager.getSelectedCity());
-                    break;
-                case GameState::HeroView:
-                    uiManager.drawHeroInfo(window, gameManager.getPlayerHero());
-                    break;
-                case GameState::ArmyView:
-                    uiManager.drawArmyInfo(window, gameManager.getPlayerArmy());
-                    break;
-                case GameState::MerchantView:
-                    uiManager.drawMerchantInfo(window, gameManager.getSelectedMerchant());
-                    break;
-                default:
-                    break;
+            RomanUI::drawSidebar(window, uiViewSize.x, uiViewSize.y, uiManager.getFont(), playerPos);
+            
+            // Draw minimap in sidebar
+            sf::Vector2f mapSize(MAP_WIDTH * HEX_WIDTH, MAP_HEIGHT * HEX_HEIGHT * 0.75f);
+            RomanUI::drawMinimap(window, uiViewSize.x - RomanUI::Layout::SIDEBAR_WIDTH + 20, 50, 
+                                RomanUI::Layout::MINIMAP_SIZE, gameView.getCenter(), mapSize);
+            
+            // Draw Roman border around the game area (excluding sidebar)
+            float gameAreaWidth = uiViewSize.x - RomanUI::Layout::SIDEBAR_WIDTH - 20;
+            RomanUI::drawRomanBorder(window, 10, 10, gameAreaWidth, uiViewSize.y - 20);
+            
+            // Show city interaction prompt when player is near a city
+            if (gameManager.getPlayerHero()) {
+                sf::Vector2f heroPos = gameManager.getPlayerHero()->getPosition();
+                auto& cities = cityManager.getCities();
+                bool nearCity = false;
+                std::string nearestCityName;
+                
+                for (const auto& city : cities) {
+                    sf::Vector2f cityPos = city.getPosition();
+                    float distance = std::sqrt(std::pow(heroPos.x - cityPos.x, 2) + 
+                                              std::pow(heroPos.y - cityPos.y, 2));
+                    if (distance < HEX_SIZE * 3.5f) {
+                        nearCity = true;
+                        nearestCityName = city.getName();
+                        break;
+                    }
+                }
+                
+                if (nearCity) {
+                    // Draw interaction prompt
+                    sf::RectangleShape promptBg(sf::Vector2f(300, 50));
+                    promptBg.setPosition(sf::Vector2f((gameAreaWidth - 300) / 2, uiViewSize.y - 100));
+                    promptBg.setFillColor(sf::Color(0, 0, 0, 180));
+                    promptBg.setOutlineColor(RomanUI::Colors::ROMAN_GOLD);
+                    promptBg.setOutlineThickness(2);
+                    window.draw(promptBg);
+                    
+                    sf::Text promptText(uiManager.getFont());
+                    promptText.setString("Press E to enter " + nearestCityName);
+                    promptText.setCharacterSize(14);
+                    promptText.setFillColor(RomanUI::Colors::ROMAN_GOLD);
+                    promptText.setPosition(sf::Vector2f((gameAreaWidth - 280) / 2, uiViewSize.y - 90));
+                    window.draw(promptText);
+                }
             }
             
-            uiManager.drawModal(window);
+            // Draw modals if open
+            if (isModalOpen) {
+                float modalX = (uiViewSize.x - RomanUI::Layout::MODAL_WIDTH) / 2;
+                float modalY = (uiViewSize.y - RomanUI::Layout::MODAL_HEIGHT) / 2;
+                
+                switch (currentModal) {
+                    case RomanUI::ModalType::CharacterManagement:
+                        RomanUI::drawCharacterModal(window, uiManager.getFont());
+                        break;
+                    case RomanUI::ModalType::ArmyManagement:
+                        RomanUI::drawArmyModal(window, uiManager.getFont());
+                        break;
+                    case RomanUI::ModalType::SkillsManagement:
+                        RomanUI::drawSkillsModal(window, uiManager.getFont());
+                        break;
+                    case RomanUI::ModalType::CityManagement:
+                        RomanUI::drawCityModal(window, uiManager.getFont());
+                        break;
+                    case RomanUI::ModalType::BuildingManagement:
+                        RomanUI::drawBuildingModal(window, uiManager.getFont(), "City Center");
+                        break;
+                    case RomanUI::ModalType::Barracks:
+                        RomanUI::drawBuildingModal(window, uiManager.getFont(), "Barracks");
+                        break;
+                    case RomanUI::ModalType::Market:
+                        RomanUI::drawBuildingModal(window, uiManager.getFont(), "Market");
+                        break;
+                    case RomanUI::ModalType::Temple:
+                        RomanUI::drawBuildingModal(window, uiManager.getFont(), "Temple");
+                        break;
+                    default:
+                        break;
+                }
+            }
             window.setView(gameView);
         }
 

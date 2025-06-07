@@ -24,6 +24,11 @@ NPCMerchant* GameManager::getSelectedMerchant() const {
 }
 
 void GameManager::initialize(const sf::Vector2f& startPosition, const sf::Font& font) {
+    // Load textures first
+    if (!loadTextures()) {
+        std::cerr << "Failed to load game textures!" << std::endl;
+    }
+    
     playerHero = new Hero(startPosition, "Aragorn", font);
     playerArmy = new Army(playerHero);
     playerArmy->addUnit(ArmyUnit("Footman", ArmyUnitType::Infantry, 100, 10, 8, 50));
@@ -34,6 +39,17 @@ void GameManager::initialize(const sf::Vector2f& startPosition, const sf::Font& 
     addMerchant("Arcane Goods", sf::Vector2f(startPosition.x + 300, startPosition.y + 300), font);
 
     merchantManager.setFontForAllMerchants(font);
+}
+
+bool GameManager::loadTextures() {
+    // Load soldier sprite texture
+    if (!soldierTexture.loadFromFile("../src/assets/soldier.png")) {
+        std::cerr << "Failed to load soldier.png texture!" << std::endl;
+        return false;
+    }
+    
+    std::cout << "Successfully loaded soldier sprite texture" << std::endl;
+    return true;
 }
 
 void GameManager::setFont(const sf::Font& font) {
@@ -139,8 +155,8 @@ void GameManager::draw(sf::RenderWindow& window) {
         playerArmy->draw(window);
     }
     
-    // Draw hero if exists
+    // Draw hero with sprite texture if exists
     if (playerHero) {
-        playerHero->draw(window);
+        playerHero->drawSprite(window, soldierTexture);
     }
 }

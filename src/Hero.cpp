@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "Hero.hpp"
 #include "Army.hpp"
+#include "RomanUI.hpp"
 #include <iostream>
 #include <cmath>
 
@@ -85,6 +86,11 @@ void Hero::draw(sf::RenderWindow& window) {
     goldText.setPosition(pos.x - (2.0f), pos.y - 25.f);
     window.draw(goldText);
     */
+}
+
+void Hero::drawSprite(sf::RenderWindow& window, const sf::Texture& spriteTexture) {
+    // Use the sprite-based rendering from RomanUI
+    RomanUI::drawSpriteCharacter(window, getPosition(), spriteTexture, getSelected());
 }
 
 void Hero::addExperience(int exp) {

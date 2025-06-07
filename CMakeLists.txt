@@ -29,6 +29,8 @@ set(SOURCES
     src/Hero.cpp           # Add this
     src/Army.cpp           # Add this
     src/NPCMerchant.cpp    # Add this if it exists
+    src/HeroesGraphics.cpp # Add Heroes of Might and Magic 3 style graphics
+    src/RomanUI.cpp        # Add Roman Empire UI system
 )
 
 # Create executable

@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/opt/homebrew/include -I/Users/mp/Documents/CPP/hexagonmapcpp/src
+CXX_INCLUDES = -I/opt/homebrew/include -I/Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src
 
 CXX_FLAGSarm64 = -std=gnu++17 -arch arm64
 

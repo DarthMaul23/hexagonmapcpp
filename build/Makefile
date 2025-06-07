@@ -57,10 +57,10 @@ RM = /opt/homebrew/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/mp/Documents/CPP/hexagonmapcpp
+CMAKE_SOURCE_DIR = /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/mp/Documents/CPP/hexagonmapcpp/build
+CMAKE_BINARY_DIR = /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/mp/Documents/CPP/hexagonmapcpp/build/CMakeFiles /Users/mp/Documents/CPP/hexagonmapcpp/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/build/CMakeFiles /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/mp/Documents/CPP/hexagonmapcpp/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -249,6 +249,30 @@ src/Hero.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/HexagonMap.dir/build.make CMakeFiles/HexagonMap.dir/src/Hero.cpp.s
 .PHONY : src/Hero.cpp.s
 
+src/HeroesGraphics.o: src/HeroesGraphics.cpp.o
+.PHONY : src/HeroesGraphics.o
+
+# target to build an object file
+src/HeroesGraphics.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HexagonMap.dir/build.make CMakeFiles/HexagonMap.dir/src/HeroesGraphics.cpp.o
+.PHONY : src/HeroesGraphics.cpp.o
+
+src/HeroesGraphics.i: src/HeroesGraphics.cpp.i
+.PHONY : src/HeroesGraphics.i
+
+# target to preprocess a source file
+src/HeroesGraphics.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HexagonMap.dir/build.make CMakeFiles/HexagonMap.dir/src/HeroesGraphics.cpp.i
+.PHONY : src/HeroesGraphics.cpp.i
+
+src/HeroesGraphics.s: src/HeroesGraphics.cpp.s
+.PHONY : src/HeroesGraphics.s
+
+# target to generate assembly for a file
+src/HeroesGraphics.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HexagonMap.dir/build.make CMakeFiles/HexagonMap.dir/src/HeroesGraphics.cpp.s
+.PHONY : src/HeroesGraphics.cpp.s
+
 src/NPCMerchant.o: src/NPCMerchant.cpp.o
 .PHONY : src/NPCMerchant.o
 
@@ -320,6 +344,30 @@ src/PlayerUnit.s: src/PlayerUnit.cpp.s
 src/PlayerUnit.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/HexagonMap.dir/build.make CMakeFiles/HexagonMap.dir/src/PlayerUnit.cpp.s
 .PHONY : src/PlayerUnit.cpp.s
+
+src/RomanUI.o: src/RomanUI.cpp.o
+.PHONY : src/RomanUI.o
+
+# target to build an object file
+src/RomanUI.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HexagonMap.dir/build.make CMakeFiles/HexagonMap.dir/src/RomanUI.cpp.o
+.PHONY : src/RomanUI.cpp.o
+
+src/RomanUI.i: src/RomanUI.cpp.i
+.PHONY : src/RomanUI.i
+
+# target to preprocess a source file
+src/RomanUI.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HexagonMap.dir/build.make CMakeFiles/HexagonMap.dir/src/RomanUI.cpp.i
+.PHONY : src/RomanUI.cpp.i
+
+src/RomanUI.s: src/RomanUI.cpp.s
+.PHONY : src/RomanUI.s
+
+# target to generate assembly for a file
+src/RomanUI.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HexagonMap.dir/build.make CMakeFiles/HexagonMap.dir/src/RomanUI.cpp.s
+.PHONY : src/RomanUI.cpp.s
 
 src/Tile.o: src/Tile.cpp.o
 .PHONY : src/Tile.o
@@ -441,6 +489,9 @@ help:
 	@echo "... src/Hero.o"
 	@echo "... src/Hero.i"
 	@echo "... src/Hero.s"
+	@echo "... src/HeroesGraphics.o"
+	@echo "... src/HeroesGraphics.i"
+	@echo "... src/HeroesGraphics.s"
 	@echo "... src/NPCMerchant.o"
 	@echo "... src/NPCMerchant.i"
 	@echo "... src/NPCMerchant.s"
@@ -450,6 +501,9 @@ help:
 	@echo "... src/PlayerUnit.o"
 	@echo "... src/PlayerUnit.i"
 	@echo "... src/PlayerUnit.s"
+	@echo "... src/RomanUI.o"
+	@echo "... src/RomanUI.i"
+	@echo "... src/RomanUI.s"
 	@echo "... src/Tile.o"
 	@echo "... src/Tile.i"
 	@echo "... src/Tile.s"

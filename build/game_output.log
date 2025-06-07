@@ -1,0 +1,46 @@
+Failed to load font (failed to open file): No such file or directory
+    Provided path: arial.ttf
+    Absolute path: /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/build/arial.ttf
+Successfully loaded font from: ../assets/arial.ttf
+Successfully loaded soldier sprite texture
+Added Footman to army. Total units: 1
+Added Archer to army. Total units: 2
+City created: Athens at position: 519.615, 450
+New city founded: Athens
+Added city 1 at position: 519.615, 450
+Too close to an existing city!
+Added city 2 at position: 779.423, 360
+City created: Rome at position: 1065.21, 675
+New city founded: Rome
+Added city 3 at position: 1065.21, 675
+City created: Alexandria at position: 623.538, 900
+New city founded: Alexandria
+Added city 4 at position: 623.538, 900
+Total cities: 3
+Click at world position: 292.09, 237.142 (view center: 361.09, 242.142)
+Selected player hero.
+Invalid start or goal tile
+Invalid start or goal tile
+Click at world position: 277.774, 220.196 (view center: 255.774, 322.196)
+Selected player hero.
+Click at world position: 363.774, 222.196 (view center: 255.774, 322.196)
+No unit selected!
+Modal click at UI position: 745, 580
+Close button area: 692, 559 to 792, 589
+Close button clicked!
+Modal click at UI position: 602, 239
+Close button area: 692, 559 to 792, 589
+Modal click at UI position: 514, 239
+Close button area: 692, 559 to 792, 589
+Modal click at UI position: 493, 278
+Close button area: 692, 559 to 792, 589
+Modal click at UI position: 745, 572
+Close button area: 692, 559 to 792, 589
+Close button clicked!
+Modal click at UI position: 727, 596
+Close button area: 692, 559 to 792, 589
+Modal click at UI position: 732, 577
+Close button area: 692, 559 to 792, 589
+Close button clicked!
+No unit selected!
+No unit selected!

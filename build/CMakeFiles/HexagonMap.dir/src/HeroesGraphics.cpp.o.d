@@ -1,8 +1,6 @@
-CMakeFiles/HexagonMap.dir/src/GameManager.cpp.o: \
-  /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/GameManager.cpp \
-  /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/GameManager.hpp \
-  /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/Hero.hpp \
-  /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/GameEntities.hpp \
+CMakeFiles/HexagonMap.dir/src/HeroesGraphics.cpp.o: \
+  /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/HeroesGraphics.cpp \
+  /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/HeroesGraphics.hpp \
   /opt/homebrew/include/SFML/Graphics.hpp \
   /opt/homebrew/include/SFML/Graphics/BlendMode.hpp \
   /opt/homebrew/include/SFML/Graphics/Export.hpp \
@@ -899,9 +897,4 @@ CMakeFiles/HexagonMap.dir/src/GameManager.cpp.o: \
   /opt/homebrew/include/SFML/System/InputStream.hpp \
   /opt/homebrew/include/SFML/System/MemoryInputStream.hpp \
   /opt/homebrew/include/SFML/System/Sleep.hpp \
-  /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/PlayerUnit.hpp \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/map \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__tree \
-  /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/Army.hpp \
-  /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/NPCMerchant.hpp \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/iostream
+  /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/GameEntities.hpp

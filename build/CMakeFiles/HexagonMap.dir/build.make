@@ -53,10 +53,10 @@ RM = /opt/homebrew/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/mp/Documents/CPP/hexagonmapcpp
+CMAKE_SOURCE_DIR = /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/mp/Documents/CPP/hexagonmapcpp/build
+CMAKE_BINARY_DIR = /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/HexagonMap.dir/depend.make
@@ -73,172 +73,200 @@ CMakeFiles/HexagonMap.dir/codegen:
 .PHONY : CMakeFiles/HexagonMap.dir/codegen
 
 CMakeFiles/HexagonMap.dir/src/main.cpp.o: CMakeFiles/HexagonMap.dir/flags.make
-CMakeFiles/HexagonMap.dir/src/main.cpp.o: /Users/mp/Documents/CPP/hexagonmapcpp/src/main.cpp
+CMakeFiles/HexagonMap.dir/src/main.cpp.o: /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/main.cpp
 CMakeFiles/HexagonMap.dir/src/main.cpp.o: CMakeFiles/HexagonMap.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/mp/Documents/CPP/hexagonmapcpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/HexagonMap.dir/src/main.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/HexagonMap.dir/src/main.cpp.o -MF CMakeFiles/HexagonMap.dir/src/main.cpp.o.d -o CMakeFiles/HexagonMap.dir/src/main.cpp.o -c /Users/mp/Documents/CPP/hexagonmapcpp/src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/HexagonMap.dir/src/main.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/HexagonMap.dir/src/main.cpp.o -MF CMakeFiles/HexagonMap.dir/src/main.cpp.o.d -o CMakeFiles/HexagonMap.dir/src/main.cpp.o -c /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/main.cpp
 
 CMakeFiles/HexagonMap.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/HexagonMap.dir/src/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mp/Documents/CPP/hexagonmapcpp/src/main.cpp > CMakeFiles/HexagonMap.dir/src/main.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/main.cpp > CMakeFiles/HexagonMap.dir/src/main.cpp.i
 
 CMakeFiles/HexagonMap.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/HexagonMap.dir/src/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mp/Documents/CPP/hexagonmapcpp/src/main.cpp -o CMakeFiles/HexagonMap.dir/src/main.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/main.cpp -o CMakeFiles/HexagonMap.dir/src/main.cpp.s
 
 CMakeFiles/HexagonMap.dir/src/City.cpp.o: CMakeFiles/HexagonMap.dir/flags.make
-CMakeFiles/HexagonMap.dir/src/City.cpp.o: /Users/mp/Documents/CPP/hexagonmapcpp/src/City.cpp
+CMakeFiles/HexagonMap.dir/src/City.cpp.o: /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/City.cpp
 CMakeFiles/HexagonMap.dir/src/City.cpp.o: CMakeFiles/HexagonMap.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/mp/Documents/CPP/hexagonmapcpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/HexagonMap.dir/src/City.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/HexagonMap.dir/src/City.cpp.o -MF CMakeFiles/HexagonMap.dir/src/City.cpp.o.d -o CMakeFiles/HexagonMap.dir/src/City.cpp.o -c /Users/mp/Documents/CPP/hexagonmapcpp/src/City.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/HexagonMap.dir/src/City.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/HexagonMap.dir/src/City.cpp.o -MF CMakeFiles/HexagonMap.dir/src/City.cpp.o.d -o CMakeFiles/HexagonMap.dir/src/City.cpp.o -c /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/City.cpp
 
 CMakeFiles/HexagonMap.dir/src/City.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/HexagonMap.dir/src/City.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mp/Documents/CPP/hexagonmapcpp/src/City.cpp > CMakeFiles/HexagonMap.dir/src/City.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/City.cpp > CMakeFiles/HexagonMap.dir/src/City.cpp.i
 
 CMakeFiles/HexagonMap.dir/src/City.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/HexagonMap.dir/src/City.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mp/Documents/CPP/hexagonmapcpp/src/City.cpp -o CMakeFiles/HexagonMap.dir/src/City.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/City.cpp -o CMakeFiles/HexagonMap.dir/src/City.cpp.s
 
 CMakeFiles/HexagonMap.dir/src/CityManager.cpp.o: CMakeFiles/HexagonMap.dir/flags.make
-CMakeFiles/HexagonMap.dir/src/CityManager.cpp.o: /Users/mp/Documents/CPP/hexagonmapcpp/src/CityManager.cpp
+CMakeFiles/HexagonMap.dir/src/CityManager.cpp.o: /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/CityManager.cpp
 CMakeFiles/HexagonMap.dir/src/CityManager.cpp.o: CMakeFiles/HexagonMap.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/mp/Documents/CPP/hexagonmapcpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/HexagonMap.dir/src/CityManager.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/HexagonMap.dir/src/CityManager.cpp.o -MF CMakeFiles/HexagonMap.dir/src/CityManager.cpp.o.d -o CMakeFiles/HexagonMap.dir/src/CityManager.cpp.o -c /Users/mp/Documents/CPP/hexagonmapcpp/src/CityManager.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/HexagonMap.dir/src/CityManager.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/HexagonMap.dir/src/CityManager.cpp.o -MF CMakeFiles/HexagonMap.dir/src/CityManager.cpp.o.d -o CMakeFiles/HexagonMap.dir/src/CityManager.cpp.o -c /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/CityManager.cpp
 
 CMakeFiles/HexagonMap.dir/src/CityManager.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/HexagonMap.dir/src/CityManager.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mp/Documents/CPP/hexagonmapcpp/src/CityManager.cpp > CMakeFiles/HexagonMap.dir/src/CityManager.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/CityManager.cpp > CMakeFiles/HexagonMap.dir/src/CityManager.cpp.i
 
 CMakeFiles/HexagonMap.dir/src/CityManager.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/HexagonMap.dir/src/CityManager.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mp/Documents/CPP/hexagonmapcpp/src/CityManager.cpp -o CMakeFiles/HexagonMap.dir/src/CityManager.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/CityManager.cpp -o CMakeFiles/HexagonMap.dir/src/CityManager.cpp.s
 
 CMakeFiles/HexagonMap.dir/src/PathFinder.cpp.o: CMakeFiles/HexagonMap.dir/flags.make
-CMakeFiles/HexagonMap.dir/src/PathFinder.cpp.o: /Users/mp/Documents/CPP/hexagonmapcpp/src/PathFinder.cpp
+CMakeFiles/HexagonMap.dir/src/PathFinder.cpp.o: /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/PathFinder.cpp
 CMakeFiles/HexagonMap.dir/src/PathFinder.cpp.o: CMakeFiles/HexagonMap.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/mp/Documents/CPP/hexagonmapcpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/HexagonMap.dir/src/PathFinder.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/HexagonMap.dir/src/PathFinder.cpp.o -MF CMakeFiles/HexagonMap.dir/src/PathFinder.cpp.o.d -o CMakeFiles/HexagonMap.dir/src/PathFinder.cpp.o -c /Users/mp/Documents/CPP/hexagonmapcpp/src/PathFinder.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/HexagonMap.dir/src/PathFinder.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/HexagonMap.dir/src/PathFinder.cpp.o -MF CMakeFiles/HexagonMap.dir/src/PathFinder.cpp.o.d -o CMakeFiles/HexagonMap.dir/src/PathFinder.cpp.o -c /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/PathFinder.cpp
 
 CMakeFiles/HexagonMap.dir/src/PathFinder.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/HexagonMap.dir/src/PathFinder.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mp/Documents/CPP/hexagonmapcpp/src/PathFinder.cpp > CMakeFiles/HexagonMap.dir/src/PathFinder.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/PathFinder.cpp > CMakeFiles/HexagonMap.dir/src/PathFinder.cpp.i
 
 CMakeFiles/HexagonMap.dir/src/PathFinder.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/HexagonMap.dir/src/PathFinder.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mp/Documents/CPP/hexagonmapcpp/src/PathFinder.cpp -o CMakeFiles/HexagonMap.dir/src/PathFinder.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/PathFinder.cpp -o CMakeFiles/HexagonMap.dir/src/PathFinder.cpp.s
 
 CMakeFiles/HexagonMap.dir/src/PlayerUnit.cpp.o: CMakeFiles/HexagonMap.dir/flags.make
-CMakeFiles/HexagonMap.dir/src/PlayerUnit.cpp.o: /Users/mp/Documents/CPP/hexagonmapcpp/src/PlayerUnit.cpp
+CMakeFiles/HexagonMap.dir/src/PlayerUnit.cpp.o: /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/PlayerUnit.cpp
 CMakeFiles/HexagonMap.dir/src/PlayerUnit.cpp.o: CMakeFiles/HexagonMap.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/mp/Documents/CPP/hexagonmapcpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/HexagonMap.dir/src/PlayerUnit.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/HexagonMap.dir/src/PlayerUnit.cpp.o -MF CMakeFiles/HexagonMap.dir/src/PlayerUnit.cpp.o.d -o CMakeFiles/HexagonMap.dir/src/PlayerUnit.cpp.o -c /Users/mp/Documents/CPP/hexagonmapcpp/src/PlayerUnit.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/HexagonMap.dir/src/PlayerUnit.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/HexagonMap.dir/src/PlayerUnit.cpp.o -MF CMakeFiles/HexagonMap.dir/src/PlayerUnit.cpp.o.d -o CMakeFiles/HexagonMap.dir/src/PlayerUnit.cpp.o -c /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/PlayerUnit.cpp
 
 CMakeFiles/HexagonMap.dir/src/PlayerUnit.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/HexagonMap.dir/src/PlayerUnit.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mp/Documents/CPP/hexagonmapcpp/src/PlayerUnit.cpp > CMakeFiles/HexagonMap.dir/src/PlayerUnit.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/PlayerUnit.cpp > CMakeFiles/HexagonMap.dir/src/PlayerUnit.cpp.i
 
 CMakeFiles/HexagonMap.dir/src/PlayerUnit.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/HexagonMap.dir/src/PlayerUnit.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mp/Documents/CPP/hexagonmapcpp/src/PlayerUnit.cpp -o CMakeFiles/HexagonMap.dir/src/PlayerUnit.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/PlayerUnit.cpp -o CMakeFiles/HexagonMap.dir/src/PlayerUnit.cpp.s
 
 CMakeFiles/HexagonMap.dir/src/Tile.cpp.o: CMakeFiles/HexagonMap.dir/flags.make
-CMakeFiles/HexagonMap.dir/src/Tile.cpp.o: /Users/mp/Documents/CPP/hexagonmapcpp/src/Tile.cpp
+CMakeFiles/HexagonMap.dir/src/Tile.cpp.o: /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/Tile.cpp
 CMakeFiles/HexagonMap.dir/src/Tile.cpp.o: CMakeFiles/HexagonMap.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/mp/Documents/CPP/hexagonmapcpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/HexagonMap.dir/src/Tile.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/HexagonMap.dir/src/Tile.cpp.o -MF CMakeFiles/HexagonMap.dir/src/Tile.cpp.o.d -o CMakeFiles/HexagonMap.dir/src/Tile.cpp.o -c /Users/mp/Documents/CPP/hexagonmapcpp/src/Tile.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/HexagonMap.dir/src/Tile.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/HexagonMap.dir/src/Tile.cpp.o -MF CMakeFiles/HexagonMap.dir/src/Tile.cpp.o.d -o CMakeFiles/HexagonMap.dir/src/Tile.cpp.o -c /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/Tile.cpp
 
 CMakeFiles/HexagonMap.dir/src/Tile.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/HexagonMap.dir/src/Tile.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mp/Documents/CPP/hexagonmapcpp/src/Tile.cpp > CMakeFiles/HexagonMap.dir/src/Tile.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/Tile.cpp > CMakeFiles/HexagonMap.dir/src/Tile.cpp.i
 
 CMakeFiles/HexagonMap.dir/src/Tile.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/HexagonMap.dir/src/Tile.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mp/Documents/CPP/hexagonmapcpp/src/Tile.cpp -o CMakeFiles/HexagonMap.dir/src/Tile.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/Tile.cpp -o CMakeFiles/HexagonMap.dir/src/Tile.cpp.s
 
 CMakeFiles/HexagonMap.dir/src/UIManager.cpp.o: CMakeFiles/HexagonMap.dir/flags.make
-CMakeFiles/HexagonMap.dir/src/UIManager.cpp.o: /Users/mp/Documents/CPP/hexagonmapcpp/src/UIManager.cpp
+CMakeFiles/HexagonMap.dir/src/UIManager.cpp.o: /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/UIManager.cpp
 CMakeFiles/HexagonMap.dir/src/UIManager.cpp.o: CMakeFiles/HexagonMap.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/mp/Documents/CPP/hexagonmapcpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/HexagonMap.dir/src/UIManager.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/HexagonMap.dir/src/UIManager.cpp.o -MF CMakeFiles/HexagonMap.dir/src/UIManager.cpp.o.d -o CMakeFiles/HexagonMap.dir/src/UIManager.cpp.o -c /Users/mp/Documents/CPP/hexagonmapcpp/src/UIManager.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/HexagonMap.dir/src/UIManager.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/HexagonMap.dir/src/UIManager.cpp.o -MF CMakeFiles/HexagonMap.dir/src/UIManager.cpp.o.d -o CMakeFiles/HexagonMap.dir/src/UIManager.cpp.o -c /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/UIManager.cpp
 
 CMakeFiles/HexagonMap.dir/src/UIManager.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/HexagonMap.dir/src/UIManager.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mp/Documents/CPP/hexagonmapcpp/src/UIManager.cpp > CMakeFiles/HexagonMap.dir/src/UIManager.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/UIManager.cpp > CMakeFiles/HexagonMap.dir/src/UIManager.cpp.i
 
 CMakeFiles/HexagonMap.dir/src/UIManager.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/HexagonMap.dir/src/UIManager.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mp/Documents/CPP/hexagonmapcpp/src/UIManager.cpp -o CMakeFiles/HexagonMap.dir/src/UIManager.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/UIManager.cpp -o CMakeFiles/HexagonMap.dir/src/UIManager.cpp.s
 
 CMakeFiles/HexagonMap.dir/src/UnitManager.cpp.o: CMakeFiles/HexagonMap.dir/flags.make
-CMakeFiles/HexagonMap.dir/src/UnitManager.cpp.o: /Users/mp/Documents/CPP/hexagonmapcpp/src/UnitManager.cpp
+CMakeFiles/HexagonMap.dir/src/UnitManager.cpp.o: /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/UnitManager.cpp
 CMakeFiles/HexagonMap.dir/src/UnitManager.cpp.o: CMakeFiles/HexagonMap.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/mp/Documents/CPP/hexagonmapcpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/HexagonMap.dir/src/UnitManager.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/HexagonMap.dir/src/UnitManager.cpp.o -MF CMakeFiles/HexagonMap.dir/src/UnitManager.cpp.o.d -o CMakeFiles/HexagonMap.dir/src/UnitManager.cpp.o -c /Users/mp/Documents/CPP/hexagonmapcpp/src/UnitManager.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/HexagonMap.dir/src/UnitManager.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/HexagonMap.dir/src/UnitManager.cpp.o -MF CMakeFiles/HexagonMap.dir/src/UnitManager.cpp.o.d -o CMakeFiles/HexagonMap.dir/src/UnitManager.cpp.o -c /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/UnitManager.cpp
 
 CMakeFiles/HexagonMap.dir/src/UnitManager.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/HexagonMap.dir/src/UnitManager.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mp/Documents/CPP/hexagonmapcpp/src/UnitManager.cpp > CMakeFiles/HexagonMap.dir/src/UnitManager.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/UnitManager.cpp > CMakeFiles/HexagonMap.dir/src/UnitManager.cpp.i
 
 CMakeFiles/HexagonMap.dir/src/UnitManager.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/HexagonMap.dir/src/UnitManager.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mp/Documents/CPP/hexagonmapcpp/src/UnitManager.cpp -o CMakeFiles/HexagonMap.dir/src/UnitManager.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/UnitManager.cpp -o CMakeFiles/HexagonMap.dir/src/UnitManager.cpp.s
 
 CMakeFiles/HexagonMap.dir/src/GameManager.cpp.o: CMakeFiles/HexagonMap.dir/flags.make
-CMakeFiles/HexagonMap.dir/src/GameManager.cpp.o: /Users/mp/Documents/CPP/hexagonmapcpp/src/GameManager.cpp
+CMakeFiles/HexagonMap.dir/src/GameManager.cpp.o: /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/GameManager.cpp
 CMakeFiles/HexagonMap.dir/src/GameManager.cpp.o: CMakeFiles/HexagonMap.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/mp/Documents/CPP/hexagonmapcpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/HexagonMap.dir/src/GameManager.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/HexagonMap.dir/src/GameManager.cpp.o -MF CMakeFiles/HexagonMap.dir/src/GameManager.cpp.o.d -o CMakeFiles/HexagonMap.dir/src/GameManager.cpp.o -c /Users/mp/Documents/CPP/hexagonmapcpp/src/GameManager.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/HexagonMap.dir/src/GameManager.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/HexagonMap.dir/src/GameManager.cpp.o -MF CMakeFiles/HexagonMap.dir/src/GameManager.cpp.o.d -o CMakeFiles/HexagonMap.dir/src/GameManager.cpp.o -c /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/GameManager.cpp
 
 CMakeFiles/HexagonMap.dir/src/GameManager.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/HexagonMap.dir/src/GameManager.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mp/Documents/CPP/hexagonmapcpp/src/GameManager.cpp > CMakeFiles/HexagonMap.dir/src/GameManager.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/GameManager.cpp > CMakeFiles/HexagonMap.dir/src/GameManager.cpp.i
 
 CMakeFiles/HexagonMap.dir/src/GameManager.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/HexagonMap.dir/src/GameManager.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mp/Documents/CPP/hexagonmapcpp/src/GameManager.cpp -o CMakeFiles/HexagonMap.dir/src/GameManager.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/GameManager.cpp -o CMakeFiles/HexagonMap.dir/src/GameManager.cpp.s
 
 CMakeFiles/HexagonMap.dir/src/Hero.cpp.o: CMakeFiles/HexagonMap.dir/flags.make
-CMakeFiles/HexagonMap.dir/src/Hero.cpp.o: /Users/mp/Documents/CPP/hexagonmapcpp/src/Hero.cpp
+CMakeFiles/HexagonMap.dir/src/Hero.cpp.o: /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/Hero.cpp
 CMakeFiles/HexagonMap.dir/src/Hero.cpp.o: CMakeFiles/HexagonMap.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/mp/Documents/CPP/hexagonmapcpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/HexagonMap.dir/src/Hero.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/HexagonMap.dir/src/Hero.cpp.o -MF CMakeFiles/HexagonMap.dir/src/Hero.cpp.o.d -o CMakeFiles/HexagonMap.dir/src/Hero.cpp.o -c /Users/mp/Documents/CPP/hexagonmapcpp/src/Hero.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/HexagonMap.dir/src/Hero.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/HexagonMap.dir/src/Hero.cpp.o -MF CMakeFiles/HexagonMap.dir/src/Hero.cpp.o.d -o CMakeFiles/HexagonMap.dir/src/Hero.cpp.o -c /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/Hero.cpp
 
 CMakeFiles/HexagonMap.dir/src/Hero.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/HexagonMap.dir/src/Hero.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mp/Documents/CPP/hexagonmapcpp/src/Hero.cpp > CMakeFiles/HexagonMap.dir/src/Hero.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/Hero.cpp > CMakeFiles/HexagonMap.dir/src/Hero.cpp.i
 
 CMakeFiles/HexagonMap.dir/src/Hero.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/HexagonMap.dir/src/Hero.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mp/Documents/CPP/hexagonmapcpp/src/Hero.cpp -o CMakeFiles/HexagonMap.dir/src/Hero.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/Hero.cpp -o CMakeFiles/HexagonMap.dir/src/Hero.cpp.s
 
 CMakeFiles/HexagonMap.dir/src/Army.cpp.o: CMakeFiles/HexagonMap.dir/flags.make
-CMakeFiles/HexagonMap.dir/src/Army.cpp.o: /Users/mp/Documents/CPP/hexagonmapcpp/src/Army.cpp
+CMakeFiles/HexagonMap.dir/src/Army.cpp.o: /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/Army.cpp
 CMakeFiles/HexagonMap.dir/src/Army.cpp.o: CMakeFiles/HexagonMap.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/mp/Documents/CPP/hexagonmapcpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/HexagonMap.dir/src/Army.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/HexagonMap.dir/src/Army.cpp.o -MF CMakeFiles/HexagonMap.dir/src/Army.cpp.o.d -o CMakeFiles/HexagonMap.dir/src/Army.cpp.o -c /Users/mp/Documents/CPP/hexagonmapcpp/src/Army.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/HexagonMap.dir/src/Army.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/HexagonMap.dir/src/Army.cpp.o -MF CMakeFiles/HexagonMap.dir/src/Army.cpp.o.d -o CMakeFiles/HexagonMap.dir/src/Army.cpp.o -c /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/Army.cpp
 
 CMakeFiles/HexagonMap.dir/src/Army.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/HexagonMap.dir/src/Army.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mp/Documents/CPP/hexagonmapcpp/src/Army.cpp > CMakeFiles/HexagonMap.dir/src/Army.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/Army.cpp > CMakeFiles/HexagonMap.dir/src/Army.cpp.i
 
 CMakeFiles/HexagonMap.dir/src/Army.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/HexagonMap.dir/src/Army.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mp/Documents/CPP/hexagonmapcpp/src/Army.cpp -o CMakeFiles/HexagonMap.dir/src/Army.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/Army.cpp -o CMakeFiles/HexagonMap.dir/src/Army.cpp.s
 
 CMakeFiles/HexagonMap.dir/src/NPCMerchant.cpp.o: CMakeFiles/HexagonMap.dir/flags.make
-CMakeFiles/HexagonMap.dir/src/NPCMerchant.cpp.o: /Users/mp/Documents/CPP/hexagonmapcpp/src/NPCMerchant.cpp
+CMakeFiles/HexagonMap.dir/src/NPCMerchant.cpp.o: /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/NPCMerchant.cpp
 CMakeFiles/HexagonMap.dir/src/NPCMerchant.cpp.o: CMakeFiles/HexagonMap.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/mp/Documents/CPP/hexagonmapcpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/HexagonMap.dir/src/NPCMerchant.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/HexagonMap.dir/src/NPCMerchant.cpp.o -MF CMakeFiles/HexagonMap.dir/src/NPCMerchant.cpp.o.d -o CMakeFiles/HexagonMap.dir/src/NPCMerchant.cpp.o -c /Users/mp/Documents/CPP/hexagonmapcpp/src/NPCMerchant.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/HexagonMap.dir/src/NPCMerchant.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/HexagonMap.dir/src/NPCMerchant.cpp.o -MF CMakeFiles/HexagonMap.dir/src/NPCMerchant.cpp.o.d -o CMakeFiles/HexagonMap.dir/src/NPCMerchant.cpp.o -c /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/NPCMerchant.cpp
 
 CMakeFiles/HexagonMap.dir/src/NPCMerchant.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/HexagonMap.dir/src/NPCMerchant.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/mp/Documents/CPP/hexagonmapcpp/src/NPCMerchant.cpp > CMakeFiles/HexagonMap.dir/src/NPCMerchant.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/NPCMerchant.cpp > CMakeFiles/HexagonMap.dir/src/NPCMerchant.cpp.i
 
 CMakeFiles/HexagonMap.dir/src/NPCMerchant.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/HexagonMap.dir/src/NPCMerchant.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/mp/Documents/CPP/hexagonmapcpp/src/NPCMerchant.cpp -o CMakeFiles/HexagonMap.dir/src/NPCMerchant.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/NPCMerchant.cpp -o CMakeFiles/HexagonMap.dir/src/NPCMerchant.cpp.s
+
+CMakeFiles/HexagonMap.dir/src/HeroesGraphics.cpp.o: CMakeFiles/HexagonMap.dir/flags.make
+CMakeFiles/HexagonMap.dir/src/HeroesGraphics.cpp.o: /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/HeroesGraphics.cpp
+CMakeFiles/HexagonMap.dir/src/HeroesGraphics.cpp.o: CMakeFiles/HexagonMap.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/HexagonMap.dir/src/HeroesGraphics.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/HexagonMap.dir/src/HeroesGraphics.cpp.o -MF CMakeFiles/HexagonMap.dir/src/HeroesGraphics.cpp.o.d -o CMakeFiles/HexagonMap.dir/src/HeroesGraphics.cpp.o -c /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/HeroesGraphics.cpp
+
+CMakeFiles/HexagonMap.dir/src/HeroesGraphics.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/HexagonMap.dir/src/HeroesGraphics.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/HeroesGraphics.cpp > CMakeFiles/HexagonMap.dir/src/HeroesGraphics.cpp.i
+
+CMakeFiles/HexagonMap.dir/src/HeroesGraphics.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/HexagonMap.dir/src/HeroesGraphics.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/HeroesGraphics.cpp -o CMakeFiles/HexagonMap.dir/src/HeroesGraphics.cpp.s
+
+CMakeFiles/HexagonMap.dir/src/RomanUI.cpp.o: CMakeFiles/HexagonMap.dir/flags.make
+CMakeFiles/HexagonMap.dir/src/RomanUI.cpp.o: /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/RomanUI.cpp
+CMakeFiles/HexagonMap.dir/src/RomanUI.cpp.o: CMakeFiles/HexagonMap.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/HexagonMap.dir/src/RomanUI.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/HexagonMap.dir/src/RomanUI.cpp.o -MF CMakeFiles/HexagonMap.dir/src/RomanUI.cpp.o.d -o CMakeFiles/HexagonMap.dir/src/RomanUI.cpp.o -c /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/RomanUI.cpp
+
+CMakeFiles/HexagonMap.dir/src/RomanUI.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/HexagonMap.dir/src/RomanUI.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/RomanUI.cpp > CMakeFiles/HexagonMap.dir/src/RomanUI.cpp.i
+
+CMakeFiles/HexagonMap.dir/src/RomanUI.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/HexagonMap.dir/src/RomanUI.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/RomanUI.cpp -o CMakeFiles/HexagonMap.dir/src/RomanUI.cpp.s
 
 # Object files for target HexagonMap
 HexagonMap_OBJECTS = \
@@ -253,7 +281,9 @@ HexagonMap_OBJECTS = \
 "CMakeFiles/HexagonMap.dir/src/GameManager.cpp.o" \
 "CMakeFiles/HexagonMap.dir/src/Hero.cpp.o" \
 "CMakeFiles/HexagonMap.dir/src/Army.cpp.o" \
-"CMakeFiles/HexagonMap.dir/src/NPCMerchant.cpp.o"
+"CMakeFiles/HexagonMap.dir/src/NPCMerchant.cpp.o" \
+"CMakeFiles/HexagonMap.dir/src/HeroesGraphics.cpp.o" \
+"CMakeFiles/HexagonMap.dir/src/RomanUI.cpp.o"
 
 # External object files for target HexagonMap
 HexagonMap_EXTERNAL_OBJECTS =
@@ -270,9 +300,11 @@ HexagonMap: CMakeFiles/HexagonMap.dir/src/GameManager.cpp.o
 HexagonMap: CMakeFiles/HexagonMap.dir/src/Hero.cpp.o
 HexagonMap: CMakeFiles/HexagonMap.dir/src/Army.cpp.o
 HexagonMap: CMakeFiles/HexagonMap.dir/src/NPCMerchant.cpp.o
+HexagonMap: CMakeFiles/HexagonMap.dir/src/HeroesGraphics.cpp.o
+HexagonMap: CMakeFiles/HexagonMap.dir/src/RomanUI.cpp.o
 HexagonMap: CMakeFiles/HexagonMap.dir/build.make
 HexagonMap: CMakeFiles/HexagonMap.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/mp/Documents/CPP/hexagonmapcpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Linking CXX executable HexagonMap"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Linking CXX executable HexagonMap"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/HexagonMap.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -284,6 +316,6 @@ CMakeFiles/HexagonMap.dir/clean:
 .PHONY : CMakeFiles/HexagonMap.dir/clean
 
 CMakeFiles/HexagonMap.dir/depend:
-	cd /Users/mp/Documents/CPP/hexagonmapcpp/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/mp/Documents/CPP/hexagonmapcpp /Users/mp/Documents/CPP/hexagonmapcpp /Users/mp/Documents/CPP/hexagonmapcpp/build /Users/mp/Documents/CPP/hexagonmapcpp/build /Users/mp/Documents/CPP/hexagonmapcpp/build/CMakeFiles/HexagonMap.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/build /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/build /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/build/CMakeFiles/HexagonMap.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/HexagonMap.dir/depend
 

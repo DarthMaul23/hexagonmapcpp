@@ -897,4 +897,6 @@ CMakeFiles/HexagonMap.dir/src/RomanUI.cpp.o: \
   /opt/homebrew/include/SFML/System/InputStream.hpp \
   /opt/homebrew/include/SFML/System/MemoryInputStream.hpp \
   /opt/homebrew/include/SFML/System/Sleep.hpp \
-  /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/GameEntities.hpp
+  /Users/frantisekmoucha/Documents/CPP/hexagonmapcpp/src/GameEntities.hpp \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/map \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__tree
